@@ -1,0 +1,6 @@
+{
+    "NAV_CONTENTS":["OnlineBidding","HostAuction","AddMoney","profile","logout"],
+    "ID":["add_mp","prof","log"],
+    "NAMES":[{"Add_money":"add_money"}]
+ }
+ 
