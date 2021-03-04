@@ -13,7 +13,7 @@
   </head>
   <body>
     <?php
-    // include("assets/Components/navbar.php");
+    include("Assets/Components/navbar.php");
     ?>
 
     <div id="MainElement" class="row mt-3">

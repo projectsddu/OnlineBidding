@@ -14,7 +14,23 @@ input[type=text]{
     border-radius: 25px ;
     color: #ffffff;
 }
-input[type=text]::placeholder{
+input[type=password]::placeholder{
+    color:#beb9b9
+}
+input[type=password]{
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
+
+input[type=email]{
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
+input[type=email]::placeholder{
     color:#beb9b9
 }
 .sides{
