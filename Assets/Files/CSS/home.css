@@ -1,0 +1,48 @@
+.welcome_elem{
+    padding: 15px;
+    border: 2px solid #c3073F;
+    border-radius: 20px;
+    color:#ffffff
+}
+body{
+    font-family: sans-serif,narrow;
+    background-color: #1A1A1D;
+}
+input[type=text]{
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
+input[type=password]::placeholder{
+    color:#beb9b9
+}
+input[type=password]{
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
+
+input[type=email]{
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
+input[type=email]::placeholder{
+    color:#beb9b9
+}
+.sides{
+    background-color: #2f2f30;
+    border: 2px solid #be054f;
+    border-radius: 25px;
+    color: #ffffff;
+}
+input[type=text]:focus{
+    outline: 0;
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
