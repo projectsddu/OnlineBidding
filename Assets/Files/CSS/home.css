@@ -1,6 +1,6 @@
 .welcome_elem{
     padding: 15px;
-    border: 2px solid #c3073F;
+    border: 2px solid #d8134e;
     border-radius: 20px;
     color:#ffffff
 }
@@ -46,3 +46,44 @@ input[type=text]:focus{
     border-radius: 25px ;
     color: #ffffff;
 }
+.auctions_elem{
+    border: 2px solid #66fcf1;
+    border-radius: 20px;
+    color:#ffffff;
+    padding: 15px;
+}
+.card_img{
+    width: 330px;
+    height: 250px;
+    object-fit: cover;
+    /* border-radius: 19px; */
+}
+.custom_card{
+    border:2px solid #45A29E;
+    border-radius: 5px;
+    background-color: #181d24; 
+}
+.checkoutmore{
+    background-image: linear-gradient(45deg,#5fa7a3,#66fcf1);
+    color:#181d24;
+}
+.loginbtn{
+    border-radius: 4px;
+    outline: none;
+    color:#ffffff;
+    background-image: linear-gradient(45deg,#9e1b58,#f11859);
+}
+.loginbtn:hover{
+    background-color: #181d24;
+    border: 2px solid #d8134e;
+    background-image: none;
+    color: #ffffff;
+}
+.search{
+    
+    color:#080808;
+    /* border:1px solid white; */
+    border-radius: 5px;
+    background-image: linear-gradient(45deg,#1b9e88,#18f160);
+}
+
