@@ -47,7 +47,7 @@
                 <div class="card-body">
                   <h4 class="card-title"><b>Auction at Georgia state university county</b></h4>
                   <p class="card-text">Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
-                  <button class="btn checkoutmore">Check out more</button>
+                  <button class="btn checkoutmore">View Auction</button>
                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
               </div>
@@ -56,6 +56,69 @@
         </div>
       </div>
       <!-- End of auction near you element -->
+
+      <!-- Auctions in your country -->
+      <div class="auctions_elem_1 mt-3">
+        <h1 class="mb-3"><b>Auctions we found in your country!</b></h1>
+        <p>Carefully read the auction terms , some auction houses have <b>secret terms</b> and some might include a participation fee. Some might have transfer fees or some might charge shipping charges. Although nationwide auctions are quite expensive to bid on but you could push your limits!.</p>
+        <div class="auction_card_1">
+          <div class="card mb-3 custom_card_1">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="https://source.unsplash.com/1600x900/?city,UK" class="card_img" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h4 class="card-title"><b>Auction at New-york county</b></h4>
+                  <p class="card-text">Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
+                  <button class="btn checkoutmore">View Auction</button>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of auctions in your country -->
+      <!-- Worldwide auctions -->
+      <div class="auctions_elem_3 mt-3">
+        <h1 class="mb-3"><b>Auctions Hosted Internationally</b></h1>
+        <p>International auctions are far more expensive to bid upon, People around the globe bid for it. Carefully read the instructions of the auction before bidding</p>
+        <div class="auction_card_1">
+          <div class="card mb-3 custom_card">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="https://source.unsplash.com/1600x900/?Louvre,paris" class="card_img" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h4 class="card-title"><b>Auction Louvre museum Paris</b></h4>
+                  <p class="card-text">Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
+                  <p id="demo"></p>
+                  <button class="btn checkoutmore">View Auction</button>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of world-wide auctions -->
+      <!-- Host your auction -->
+      <div class="card text-center mt-4 mb-4 offer_card">
+        <div class="card-header">
+          <h3>Host your auction now</h3>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special Offers for auction out there</h5>
+          <p class="card-text">Host your auctions at the cheapest price ever. Wanna Kick out your old and antique stuff at good price host a auction now </p>
+          <a href="#" class="btn loginbtn">Host Here</a>
+        </div>
+        <div class="card-footer text-muted">
+          Special offer valid till today
+        </div>
+      </div>
+      <!-- End of host your auction -->
     </div>
     <div class="col-2" id="your_auction"></div>
   </div>
