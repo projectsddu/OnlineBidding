@@ -24,16 +24,16 @@
                             <li><a class="dropdown-item text-success" href="logout.php"><b>Logout</a></b></li>
                         </ul>
                     </li>
-                    <li style="margin-left: 435px;">
-                        <button type="button" class="btn btn-outline-success fw-bolder" data-bs-toggle="modal" data-bs-target="#login"> Login </button>
+                    <li style="margin-left: 400px;">
+                        <button type="button" class="btn loginbtn" data-bs-toggle="modal" data-bs-target="#login"> Login </button>
                     </li>
                     <li style="margin-left: 15px;;">
-                        <button type="button" class="btn btn-outline-success fw-bolder" data-bs-toggle="modal" data-bs-target="#signup"> Sign Up </button>
+                        <button type="button" class="btn loginbtn" data-bs-toggle="modal" data-bs-target="#signup"> Sign Up </button>
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success" type="submit">Search</button>
+                    <input class="form-control me-2"  style="background-color:#181d24;border:1px solid #1b9e88;border-radius:20px;color:#d8134e" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn search" type="submit">Search</button>
                 </form>
             </div>
         </div>
