@@ -15,63 +15,67 @@
 
 <body>
     <?php include("Assets/Components/navbar.php"); ?>
-    <div class="container">
-        <div class="auctions_elem mt-2">
-            <h1 class="mb-3"><b>Auction at Georgia state university county</b></h1>
-            <p>Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
-            <div class="auction_card">
-                <div class="card mb-3 custom_card">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
+    <div class="row my-3">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="auctions_elem mt-2">
+                <h1 class="mb-3"><b>Auction at Georgia state university county</b></h1>
+                <p>Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
+                <div class="auction_card">
+                    <div class="card mb-3 custom_card">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h4 class="card-title"><b>Product Title</b></h4>
+                                    <p class="card-text">Description</p>
+                                    <button class="btn checkoutmore">Bid Here</button>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h4 class="card-title"><b>Product Title</b></h4>
-                                <p class="card-text">Description</p>
-                                <button class="btn checkoutmore">Bidding Option</button>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="auction_card">
+                    <div class="card mb-3 custom_card">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h4 class="card-title"><b>Product Title</b></h4>
+                                    <p class="card-text">Description</p>
+                                    <button class="btn checkoutmore">Bidding Option</button>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="auction_card">
+                    <div class="card mb-3 custom_card">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h4 class="card-title"><b>Product Title</b></h4>
+                                    <p class="card-text">Description</p>
+                                    <button class="btn checkoutmore">Bidding Option</button>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="auction_card">
-                <div class="card mb-3 custom_card">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h4 class="card-title"><b>Product Title</b></h4>
-                                <p class="card-text">Description</p>
-                                <button class="btn checkoutmore">Bidding Option</button>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="auction_card">
-                <div class="card mb-3 custom_card">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h4 class="card-title"><b>Product Title</b></h4>
-                                <p class="card-text">Description</p>
-                                <button class="btn checkoutmore">Bidding Option</button>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
+        </div>
+        <div class="col-2"></div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
