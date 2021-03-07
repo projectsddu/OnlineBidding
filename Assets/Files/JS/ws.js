@@ -2,31 +2,25 @@
 
   window.onload=function(){
     document.getElementById("plus").addEventListener("click", function() {
-        var cur_bid=document.getElementById("cur_bid").innerText;
-        cur_bid=parseInt(cur_bid)
-        // cur_bid.innerText=String(Math.round(cur_bid+cur_bid*0.1));
-        // cur_bid.innerHTML="pop";
-        document.getElementById("cur_bid").innerText=String(Math.round(cur_bid+cur_bid*0.1));
-        console.log(typeof(String(Math.round(cur_bid+cur_bid*0.1))));
+        console.log("jenil");
+        var incr=parseInt(document.getElementById("cur_bid").innerText);
+        incr=incr+1
+        document.getElementById("cur_bid").innerText=String(incr)+"%";
+
       });
       document.getElementById("minus").addEventListener("click", function() {
-          console.log("skcajasjkasj")
-        var cur_bid=document.getElementById("cur_bid").innerText;
-        cur_bid=parseInt(cur_bid)
-        var base_price=parseInt(document.getElementById("base_p").innerText);
-        if(cur_bid<base_price)
+          console.log("penil")
+
+        var incr=parseInt(document.getElementById("cur_bid").innerText);
+        if(incr>10)
         {
-            document.getElementById("cur_bid").innerText=String(Math.round(cur_bid-cur_bid*0.1));
-            console.log(typeof(String(Math.round(cur_bid+cur_bid*0.1))));
+          incr=incr-1
+        document.getElementById("cur_bid").innerText=String(incr)+"%";
         }
         else
         {
-            
+          console.log("Cannot decrease bid with 10%");
         }
-
-        // cur_bid.innerText=String(Math.round(cur_bid+cur_bid*0.1));
-        // cur_bid.innerHTML="pop";
-        
       });
-    
+      
   }

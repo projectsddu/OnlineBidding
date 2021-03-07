@@ -52,7 +52,7 @@ ini_set('display_startup_errors', TRUE);
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h4 class="card-title" style="border-bottom:2px solid #66fcf1 ; padding-bottom:10px"><b><?php echo $title; ?></b></h4>
-                                    <p class="card-text"><b>Current Bid</b>:$<?php echo $current_bid; ?></p>
+                                    <p class="card-text"><b>Current Bid</b>:$<span id="curr_bid"><?php echo $current_bid; ?></span></p>
                                     <p class="card-text" id="base_p"><b >Base Price</b>:$<?php echo $base_bid;?></p>
                                     <button class="btn checkoutmore">Bidding Option</button>
                                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -76,19 +76,10 @@ ini_set('display_startup_errors', TRUE);
                                 <div class="col-2"><button id="minus" class="btn cust_btn_1"><b>-</b></button></div>
                                 <div class="col-8 txt mt-2" id="cur_bid"><b><?php
                                 
-                                $cur_price=$current_bid;
-                                if($current_bid==0)
-                                {
-                                    $cur_price=$base_bid;
-                                }
-                                else
-                                {
-                                    $cur_price=$base_bid+(int)$base_bid*0.1;
-                                }
-                                echo $cur_price;
+                                echo '10';
                                 
                                 
-                                ?></b></div>
+                                ?>%</b></div>
                                 <div class="col-2"><button id="plus" class="btn cust_btn_1"><b>+</b></button></div>
                             </div>
                             <div class="row my-2">
