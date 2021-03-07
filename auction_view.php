@@ -1,3 +1,26 @@
+<?php
+require_once("partial/_dbConnect.php");
+    if(isset($_GET['id']))
+    {
+        $sql="SELECT * FROM auction WHERE auction_id=".$_GET['id'];
+        $res=mysqli_query($link,$sql);
+        while($row=mysqli_fetch_assoc($res))
+        {
+            $title=$row["auction_title"];
+            $desc=$row["description"];
+        }
+        if(mysqli_num_rows($res)==0)
+        {
+
+            header("location:http://localhost/OnlineBidding/index.php");
+        }
+        
+    }
+    else
+    {
+        header("location:http://localhost/OnlineBidding/index.php");
+    }
+?>
 <!doctype html>
 <html lang="en">
 
@@ -19,9 +42,16 @@
         <div class="col-2"></div>
         <div class="col-8">
             <div class="auctions_elem mt-2">
-                <h1 class="mb-3"><b>Auction at Georgia state university county</b></h1>
-                <p>Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
-                <div class="auction_card">
+                <h1 class="mb-3"><b><?php echo $title; ?></b></h1>
+                <p><?php echo $desc; ?></p>
+                <?php
+
+                $sql="SELECT * FROM product WHERE auction_id=".$_GET['id'];
+                // echo $sql;
+                $result=mysqli_query($link,$sql);
+                while($row=mysqli_fetch_assoc($result))
+                {
+                echo '<div class="auction_card">
                     <div class="card mb-3 custom_card">
                         <div class="row g-0">
                             <div class="col-md-5">
@@ -29,50 +59,20 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
-                                    <h4 class="card-title"><b>Product Title</b></h4>
-                                    <p class="card-text">Description</p>
-                                    <button class="btn checkoutmore">Bid Here</button>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <h4 class="card-title"><b>'.$row["product_name"].'</b></h4>
+                                    <h5 style="color:#ccff00">Current Bid:'.$row["current_bid"].'</h5>
+                                    <p style="color:#03fc84">Base bid:'.$row["base_bid"].'</p>
+                                    <p class="card-text">'.$row["product_details"].'</p>
+                                    <a href="http://localhost/OnlineBidding/show_products.php?id='.$row["product_id"].'"><button class="btn checkoutmore">Bid Here</button></a>
+                                    
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>';
+                }
+                    ?>
                 </div>
-                <div class="auction_card">
-                    <div class="card mb-3 custom_card">
-                        <div class="row g-0">
-                            <div class="col-md-5">
-                                <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
-                            </div>
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <h4 class="card-title"><b>Product Title</b></h4>
-                                    <p class="card-text">Description</p>
-                                    <button class="btn checkoutmore">Bidding Option</button>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="auction_card">
-                    <div class="card mb-3 custom_card">
-                        <div class="row g-0">
-                            <div class="col-md-5">
-                                <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
-                            </div>
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <h4 class="card-title"><b>Product Title</b></h4>
-                                    <p class="card-text">Description</p>
-                                    <button class="btn checkoutmore">Bidding Option</button>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
 
         </div>
         <div class="col-2"></div>

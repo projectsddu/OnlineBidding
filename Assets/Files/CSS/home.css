@@ -113,3 +113,6 @@ input[type=text]:focus{
     border: 2px solid #ccff00;
     border-radius: 15px;
 }
+.loggedin{
+    background-image: linear-gradient(45deg,#1b9e88,#18f160);
+}

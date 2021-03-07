@@ -1,3 +1,26 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+    require_once("partial/_dbConnect.php");
+    if(isset($_GET['id']))
+    {
+        $sql="SELECT * FROM product WHERE product_id=".$_GET["id"];
+        $res=mysqli_query($link,$sql);
+        while($row=mysqli_fetch_assoc($res))
+        {
+            $title=$row['product_name'];
+            $desc=$row["product_details"];
+            $base_bid=$row["base_bid"];
+            $current_bid=$row["current_bid"];
+
+        }
+    }
+    else
+    {
+        header("location:http://localhost/OnlineBidding/index.php");
+    }
+?>
 <!doctype html>
 <html lang="en">
 
@@ -28,9 +51,9 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
-                                    <h4 class="card-title" style="border-bottom:2px solid #66fcf1 ; padding-bottom:10px"><b>Product Title</b></h4>
-                                    <p class="card-text"><b>Current Bid</b>: $3500</p>
-                                    <p class="card-text"><b>Base Price</b>: $2500</p>
+                                    <h4 class="card-title" style="border-bottom:2px solid #66fcf1 ; padding-bottom:10px"><b><?php echo $title; ?></b></h4>
+                                    <p class="card-text"><b>Current Bid</b>:$<?php echo $current_bid; ?></p>
+                                    <p class="card-text"><b>Base Price</b>:$<?php echo $base_bid;?></p>
                                     <button class="btn checkoutmore">Bidding Option</button>
                                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                 </div>
@@ -42,7 +65,7 @@
                             <div class="col">
                                 <div class="card-body">
                                     <h4 class="card-text"><b>Description</b></h4>
-                                    <p>lorem ipsum dolor amet</p>
+                                    <p><?php echo $desc; ?></p>
                                 </div>
                             </div>
                         </div>
