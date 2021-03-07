@@ -9,63 +9,57 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link type="text/css" href="Assets/Files/CSS/show_products.css" rel="stylesheet">
-
+    
     <title>Show Products</title>
 </head>
 
 <body>
 
     <?php include("Assets/Components/navbar.php") ?>
-    <div class="container">
-        <div class="auctions_elem mt-2">
-            <div class="auction_card">
-                <div class="card mb-3 custom_card">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h4 class="card-title"><b>Product Title</b></h4>
-                                <p class="card-text">Current Bid</p>
-                                <p class="card-text">Base Price</p>
-                                <button class="btn checkoutmore">Bidding Option</button>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 my-4">
+            <div class="auctions_elem mt-2">
+                <div class="auction_card">
+                    <div class="card mb-3 custom_card">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="border-bottom:2px solid #66fcf1 ; padding-bottom:10px"><b>Product Title</b></h4>
+                                    <p class="card-text"><b>Current Bid</b>: $3500</p>
+                                    <p class="card-text"><b>Base Price</b>: $2500</p>
+                                    <button class="btn checkoutmore">Bidding Option</button>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card mb-3 custom_card">
-                    <div class="row g-0">
-                        <div class="col">
-                            <div class="card-body">
-                                <p class="card-text">Description</p>
+                    <div class="card mb-3 custom_card">
+                        <div class="row g-0">
+                            <div class="col">
+                                <div class="card-body">
+                                    <h4 class="card-text"><b>Description</b></h4>
+                                    <p>lorem ipsum dolor amet</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card mb-3 custom_card">
-                    <div class="row g-0">
-                        <div class="col border">
-                            <div class="card-body">
-                                <p class="card-text">-</p>
-
+                    <div class="card mb-3 custom_card">
+                        <div class="place_bids">
+                            <div class="row mt-3" style="width:30%;margin-left:270px">
+                                <div class="col-2"><button class="btn cust_btn_1"><b>-</b></button></div>
+                                <div class="col-8 txt mt-2"><b>$28709</b></div>
+                                <div class="col-2"><button class="btn cust_btn_1"><b>+</b></button></div>
                             </div>
-                        </div>
-                        <div class="col border">
-                            <div class="card-body">
-                                <p class="card-text">Current Bid</p>
+                            <div class="row my-2">
+                                <button class="btn checkoutmore plc_bid">Place Bid</button>
                             </div>
-                        </div>
-                        <div class="col border">
-                            <div class="card-body">
-                                <p class="card-text">+</p>
+                            <div class="row">
+                                <p class="text-center">The bid must be in increments of 10% of the current bid. ex:if the current bid is $100 next bid must be $110. </p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button class="btn checkoutmore" style="margin-left:500px;">Place Bid</button>
                         </div>
                     </div>
                 </div>
