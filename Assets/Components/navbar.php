@@ -1,5 +1,5 @@
 <?php
-
+session_start();
     echo '<nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand text-white" href="#">OnlineBidding</a>
@@ -21,16 +21,27 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item text-success" href="logout.php"><b>Logout</a></b></li>
+                            <li><a class="dropdown-item text-success" href="http://localhost/OnlineBidding/logout.php"><b>Logout</a></b></li>
                         </ul>
-                    </li>
-                    <li style="margin-left: 400px;">
+                    </li>';
+
+                    if($_SESSION["isset"]==true)
+                    {
+                        echo '<li style="margin-left: 500px;">
+                        <a href="http://localhost/OnlineBidding/logout.php"><button type="button" class="btn checkoutmore">'.$_SESSION['username'].'</button></a>
+                    </li>';
+                    }
+                    else
+                    {
+                    echo'<li style="margin-left: 400px;">
                         <button type="button" class="btn loginbtn" data-bs-toggle="modal" data-bs-target="#login"> Login </button>
                     </li>
                     <li style="margin-left: 15px;;">
                         <button type="button" class="btn loginbtn" data-bs-toggle="modal" data-bs-target="#signup"> Sign Up </button>
-                    </li>
-                </ul>
+                    </li>';
+                    }
+
+                echo '</ul>
                 <form class="d-flex">
                     <input class="form-control me-2"  style="background-color:#181d24;border:1px solid #1b9e88;border-radius:20px;color:#d8134e" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn search" type="submit">Search</button>
@@ -48,7 +59,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">
+                    <form method="POST" action="login_verify.php">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username:</label>
                             <input type="text" class="form-control" id="username" name="username">
@@ -57,7 +68,7 @@
                             <label for="password" class="form-label">Password:</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
-                        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
                 <div class="modal-footer">
