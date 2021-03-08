@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
@@ -47,7 +49,7 @@ ini_set('display_startup_errors', TRUE);
 </head>
 
 <body>
-<input type="hidden" id="uid" value="<?php echo $seller; ?>">    
+<input type="hidden" id="uid" value="<?php echo $_SESSION['user_id']; ?>">    
     <?php include("Assets/Components/navbar.php") ?>
     <div class="row">
         <div class="col-2"></div>
