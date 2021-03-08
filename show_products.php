@@ -82,6 +82,21 @@ ini_set('display_startup_errors', TRUE);
                                 ?>%</b></div>
                                 <div class="col-2"><button id="plus" class="btn cust_btn_1"><b>+</b></button></div>
                             </div>
+                            <div class="row my-2" style="margin-left:300px">
+                            <div class="col-3"><b>Current Bid:</b></div>
+                            <div class="col-2" id="current_bid"><?php
+                            
+                            if($current_bid==0)
+                            {
+                                echo $base_bid;
+                            }
+                            else
+                            {
+                                echo $current_bid+$current_bid*0.1;
+                            }
+                            
+                            ?></div>
+                            </div>
                             <div class="row my-2">
                                 <button class="btn checkoutmore plc_bid">Place Bid</button>
                             </div>
