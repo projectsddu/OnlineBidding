@@ -47,7 +47,7 @@ ini_set('display_startup_errors', TRUE);
 </head>
 
 <body>
-
+<input type="hidden" id="uid" value="<?php echo $seller; ?>">    
     <?php include("Assets/Components/navbar.php") ?>
     <div class="row">
         <div class="col-2"></div>

@@ -1,6 +1,23 @@
 $(document).ready(function () {
+  var conn = new WebSocket('ws://localhost:8080');
+  conn.onopen = function(e) {
+      console.log("Connection established!");
+  };
+  
+  conn.onmessage = function(e) {
+      console.log(e.data);
+  };
+  var data={
+    "type":"connection",
+    "pid":34,
+    "uid":100
+}
+setTimeout(()=>{
 
-    
+
+    conn.send(JSON.stringify(data));
+    console.log("Data send")
+},200)
     $("#plus").click(function(){    
       
       console.log("jenil");
@@ -47,8 +64,17 @@ $(document).ready(function () {
       
       $("#place_bid").click(function(){
         alert("Do you want to place bid")
-
-        location.reload();
+        // make an ajax call from here to the websocket 
+        const queryString=window.location.search;
+        const urlParam=new URLSearchParams(queryString);
+        console.log(urlParam.get("id"));
+        // console.log(queryString);
+        var data1={
+           "type":"bidupdate",
+          "pid":34,
+          "uid":100
+      }       
+        // location.reload();
       
     })
       
