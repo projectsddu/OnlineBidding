@@ -13,8 +13,17 @@ ini_set('display_startup_errors', TRUE);
             $desc=$row["product_details"];
             $base_bid=$row["base_bid"];
             $current_bid=$row["current_bid"];
-
+            $auction_id=$row["auction_id"];
         }
+        $sql1="SELECT * FROM auction WHERE auction_id=".$auction_id;
+        $res=mysqli_query($link,$sql1);
+        while($row=mysqli_fetch_assoc($res))
+        {
+            $city=$row["auction_city"];
+            $country=$row["auction_country"];
+            $seller=$row["user_id"];
+        }
+
     }
     else
     {
@@ -31,6 +40,7 @@ ini_set('display_startup_errors', TRUE);
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link type="text/css" href="Assets/Files/CSS/show_products.css" rel="stylesheet">
     <script src="Assets/Files/JS/ws.js"></script>
     <title>Show Products</title>
@@ -60,16 +70,7 @@ ini_set('display_startup_errors', TRUE);
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-3 custom_card">
-                        <div class="row g-0">
-                            <div class="col">
-                                <div class="card-body">
-                                    <h4 class="card-text"><b>Description</b></h4>
-                                    <p><?php echo $desc; ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="card mb-3 custom_card">
                         <div class="place_bids">
                             <div class="row mt-3" style="width:30%;margin-left:270px">
@@ -98,10 +99,25 @@ ini_set('display_startup_errors', TRUE);
                             ?></div>
                             </div>
                             <div class="row my-2">
-                                <button class="btn checkoutmore plc_bid">Place Bid</button>
+                                <button class="btn checkoutmore plc_bid" id="place_bid">Place Bid</button>
                             </div>
                             <div class="row">
-                                <p class="text-center">The bid must be in increments of 10% of the current bid. ex:if the current bid is $100 next bid must be $110. </p>
+                                <p class="text-center">If the current bid is $0 then you cannot increase bid more than base price.Thenafter the bid could be raised till whatever extend you want.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3 custom_card">
+                        <div class="row g-0">
+                            <div class="col">
+                                <div class="card-body">
+                                <ul>
+                                   <li><h4 class="card-text"><b>Description</b></h4>
+                                    <p><?php echo $desc; ?></p></li>
+                                    <li><h4 class="card-text"><b>City:</b></h4><p><?php echo $city; ?></p></li>
+                                    <li><h4 class="card-text"><b>Country of origin:</b></h4><p><?php echo $country; ?></p></li>
+                                    <li><h4 class="card-text"><b>Seller:</b></h4><p><?php echo $seller; ?></p></li>
+                                </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
