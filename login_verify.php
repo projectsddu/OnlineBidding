@@ -19,11 +19,8 @@
             {
                 $_SESSION["city"]=$row["city"];
                 $_SESSION["country"]=$row["country"];
+                $_SESSION['user_id'] = $row["user_id"];
             }
-
-
-
-
             echo "verified";
             header("location:http://localhost/OnlineBidding/index.php");
         }
