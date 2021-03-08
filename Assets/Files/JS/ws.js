@@ -71,8 +71,9 @@ setTimeout(()=>{
         // console.log(queryString);
         var data1={
            "type":"bidupdate",
-          "pid":34,
-          "uid":100
+          "pid":urlParam.get("id"),
+          "uid":document.getElementById(""),
+          
       }       
         // location.reload();
       
