@@ -16,6 +16,7 @@ ini_set('display_startup_errors', TRUE);
             $base_bid=$row["base_bid"];
             $current_bid=$row["current_bid"];
             $auction_id=$row["auction_id"];
+            $max_bidder=$row["max_bid"];
         }
         $sql1="SELECT * FROM auction WHERE auction_id=".$auction_id;
         $res=mysqli_query($link,$sql1);
@@ -30,6 +31,26 @@ ini_set('display_startup_errors', TRUE);
     else
     {
         header("location:http://localhost/OnlineBidding/index.php");
+    }
+    function getUsernameById($user_id)
+    {
+        require("partial/_dbConnect.php");
+        $sql="SELECT username from user WHERE user_id=".$user_id;
+        $res=mysqli_query($link,$sql);
+        if(!$res)
+        {
+            return false;
+        }
+        else
+        {
+            $uname="";
+            while($row=mysqli_fetch_assoc($res))
+            {
+                $uname=$row["username"];
+
+            }
+            return $uname;
+        }
     }
 ?>
 <!doctype html>
@@ -66,6 +87,18 @@ ini_set('display_startup_errors', TRUE);
                                     <h4 class="card-title" style="border-bottom:2px solid #66fcf1 ; padding-bottom:10px"><b><?php echo $title; ?></b></h4>
                                     <p class="card-text"><b>Current Bid</b>:$<span id="curr_bid"><?php echo $current_bid; ?></span></p>
                                     <p class="card-text" id="base_p"><b >Base Price</b>:$<?php echo $base_bid;?></p>
+                                    <p class="card-text"><b>Max bidder:</b> <?php
+                                    
+                                        if($max_bidder==-1)
+                                        {
+                                            echo "No bidder";
+                                        }
+                                        else
+                                        {
+                                            echo getUsernameById($max_bidder);
+                                        }
+                                    
+                                    ?></p>
                                     <button class="btn checkoutmore">Bidding Option</button>
                                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                 </div>
@@ -86,8 +119,8 @@ ini_set('display_startup_errors', TRUE);
                                 <div class="col-2"><button id="plus" class="btn cust_btn_1"><b>+</b></button></div>
                             </div>
                             <div class="row my-2" style="margin-left:300px">
-                            <div class="col-3"><b>Current Bid:</b></div>
-                            <div class="col-2" id="current_bid"><?php
+                            <div class="col-4" ><b>Current Bid: $</b></div>
+                            <div class="col-6" style="margin-left:-50px" id="current_bid"><?php
                             
                             if($current_bid==0)
                             {
@@ -95,7 +128,7 @@ ini_set('display_startup_errors', TRUE);
                             }
                             else
                             {
-                                echo $current_bid+$current_bid*0.1;
+                                echo (int)($current_bid+$current_bid*0.1);
                             }
                             
                             ?></div>

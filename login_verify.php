@@ -22,7 +22,7 @@
                 $_SESSION['user_id'] = $row["user_id"];
             }
             echo "verified";
-            header("location:http://localhost/OnlineBidding/index.php");
+            header("location:http://localhost/OnlineBidding/index.php?msg="."Successfully loggedin");
         }
         else
         {

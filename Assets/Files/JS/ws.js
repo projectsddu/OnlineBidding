@@ -5,7 +5,9 @@ $(document).ready(function () {
   };
 
   conn.onmessage = function (e) {
-    console.log(e.data);
+    //  document.getElementById("curr_bid").innerText=e.data;
+    //  document.getElementById("current_bid").innerText=Math.round(e.data+e.data*0.1);
+    location.reload();
   };
 
   const queryString = window.location.search;
@@ -35,7 +37,7 @@ $(document).ready(function () {
 
 
       document.getElementById("cur_bid").innerText = String(incr) + "%";
-      var price = (incr / 100) * base_p + base_p;
+      var price = Math.round((incr / 100) * base_p + base_p);
       console.log(price);
       document.getElementById("current_bid").innerText = String(price);
     }
@@ -54,7 +56,7 @@ $(document).ready(function () {
       document.getElementById("cur_bid").innerText = String(incr) + "%";
 
       var price = parseInt(document.getElementById("curr_bid").innerText);
-      price = price + (incr / 100) * price;
+      price = Math.round(price + (incr / 100) * price);
       document.getElementById("current_bid").innerText = String(price)
     }
     else {
@@ -77,7 +79,7 @@ $(document).ready(function () {
     }
     // console.log(data1);
     conn.send(JSON.stringify(data1));
-    location.reload();
+    setTimeout(function(){location.reload()},200);
 
   })
 }

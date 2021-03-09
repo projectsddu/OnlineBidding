@@ -1,5 +1,7 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
 function isEmptyData($username, $city, $country, $password, $c_password)
 {
     if (empty($username) || empty($city) || empty($country) || empty($password) || empty($c_password)) {
@@ -63,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
         include "partial/_dbConnect.php";
 
-        $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+        $link = mysqli_connect('localhost','root','','DM_PROJECT');
 
         // check connection
 
@@ -89,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             {
                 $_SESSION['user_id'] = $row["user_id"];
             }
-            header("location: index.php");
+            header("location: index.php?msg="."You are logged in");
         }
 
         // echo "success";

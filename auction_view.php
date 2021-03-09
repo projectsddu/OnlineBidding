@@ -60,8 +60,8 @@ require_once("partial/_dbConnect.php");
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h4 class="card-title"><b>'.$row["product_name"].'</b></h4>
-                                    <h5 style="color:#ccff00">Current Bid:'.$row["current_bid"].'</h5>
-                                    <p style="color:#03fc84">Base bid:'.$row["base_bid"].'</p>
+                                    <h5 style="color:#ccff00">Current Bid:$'.$row["current_bid"].'</h5>
+                                    <p style="color:#03fc84">Base bid:$'.$row["base_bid"].'</p>
                                     <p class="card-text">'.$row["product_details"].'</p>
                                     <a href="http://localhost/OnlineBidding/show_products.php?id='.$row["product_id"].'"><button class="btn checkoutmore">Bid Here</button></a>
                                     

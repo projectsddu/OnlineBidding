@@ -2,7 +2,7 @@
 session_start();
     echo '<nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-white" href="#">OnlineBidding</a>
+            <a class="navbar-brand text-white" href="index.php">OnlineBidding</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,15 +51,15 @@ session_start();
     </nav>
 
     <!-- modal for login-->
-    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal logmodal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content logform">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Login</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="login_verify.php">
+                    <form method="POST" class="" action="login_verify.php">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username:</label>
                             <input type="text" class="form-control" id="username" name="username">
@@ -68,23 +68,24 @@ session_start();
                             <label for="password" class="form-label">Password:</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
-                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                         
+                    
                 </div>
                 <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Login</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Login</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- modal for signup -->
-    <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade logmodal" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content logform">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">SignUp</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -113,13 +114,15 @@ session_start();
                             <label for="c_password" class="form-label">Confirm Password:</label>
                             <input type="password" class="form-control" id="c_password" name="c_password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                        
+                    
                 </div>
                 <div class="modal-footer">
+                <button type="submit" class="btn btn-success">SignUp</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Sign Up</button>
+                    
                 </div>
+                </form>
             </div>
         </div>
     </div>
