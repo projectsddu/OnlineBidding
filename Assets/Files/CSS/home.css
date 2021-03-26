@@ -14,6 +14,13 @@ input[type=text]{
     border-radius: 25px ;
     color: #ffffff;
 }
+
+input[type=date]{
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
 input[type=password]::placeholder{
     color:#beb9b9
 }
@@ -40,8 +47,8 @@ input[type=email]::placeholder{
     color: #ffffff;
 }
 input[type=text]:focus{
-    outline: 0;
-    background-color: #4e4e50;
+    outline: 0; 
+    background-color: #1b1b1d;
     border: 2px solid #be054f;
     border-radius: 25px ;
     color: #ffffff;
@@ -161,4 +168,16 @@ input[type=text]:focus{
     border: 2px solid white;
     background-color: #181d24;
     color:#faf3f3;
+}
+.txtarea{
+    background-color: #4e4e50;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
+}
+.txtarea:focus{
+    background-color: #1b1b1d;
+    border: 2px solid #be054f;
+    border-radius: 25px ;
+    color: #ffffff;
 }
