@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
     echo '<nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand text-white" href="index.php">OnlineBidding</a>
@@ -27,17 +27,38 @@ session_start();
 
                     if($_SESSION["isset"]==true)
                     {
+                        // fetch current amount of user
                         $sql="SELECT money FROM user where user_id=".$_SESSION["user_id"];
                         // echo $sql;
                         $res=mysqli_query($link,$sql);
-                        // $sql1="SELECT "
+
+                        // fetch total amount currently in max_bid
+                        $sql1="SELECT SUM(current_bid) AS sum FROM product WHERE max_bid = ".$_SESSION["user_id"];
+                        // echo $sql1;
+                        $res1 = mysqli_query($link, $sql1);
+                        if($res1)
+                        {
+                            while($row=mysqli_fetch_assoc($res1))
+                            {
+                                // store sunm
+                                $sum=$row["sum"];
+                            }
+                        }
+                        else {
+                            echo "else innnnnnnnn";
+                        }
+                        // echo $sum;
                         if($res)
                         {
                             while($row=mysqli_fetch_assoc($res))
                             {
+                                // store user current money
                                 $money=$row["money"];
                             }
                         }
+
+                        // subtract
+                        $money = $money - $sum;
                         echo '<li style="width:120px">
                         <p class="gradient-text-1" id="cur_money" style="font-size:22px;">$
                         <b>'.$money.'</b>

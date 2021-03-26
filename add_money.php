@@ -79,7 +79,6 @@ while($row=mysqli_fetch_assoc($res))
                     <button class="btn checkoutmore" style="width:340px">Add Money</button>
                 </form>
 
-
             </div>
             <!-- End of add money -->
         </div>

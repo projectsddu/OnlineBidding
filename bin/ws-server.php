@@ -12,7 +12,7 @@ use MyApp\Auction;
                 new Auction()
             )
         ),
-        8080
+        8000
     );
 
     $server->run();

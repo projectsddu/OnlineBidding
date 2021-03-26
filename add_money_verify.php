@@ -9,8 +9,9 @@ require_once("partial/_dbConnect.php");
         {
             $money=$row["money"];
         }
-        $sql="UPDATE user SET money=".$money+abs($_POST["money"])." WHERE user_id=".$_SESSION["user_id"];
-        echo $sql;
+        $total_money = $money + abs($_POST['money']);
+        $sql="UPDATE user SET money=".$total_money." WHERE user_id=".$_SESSION['user_id'];
+        // echo $sql;
         $res=mysqli_query($link,$sql);
         if(!$res)
         {
@@ -26,5 +27,4 @@ require_once("partial/_dbConnect.php");
     {
         echo "<h1>404 Page Not Found</h1>";
     }
-
 ?>
