@@ -1,3 +1,17 @@
+<?php
+require_once("partial/_dbConnect.php");
+session_start();
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
+// ini_set('display_startup_errors', TRUE);
+$msg = "";
+
+if (isset($_GET['msg'])) {
+  $msg = $_GET['msg'];
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -21,6 +35,16 @@
   <div id="MainElement" class="row mt-3">
     <div class="col-2" id="advertise"></div>
     <div class="col-8" id="Main">
+      <!-- if messages -->
+      <?php
+      if ($msg != "") {
+        echo '<div class="alert loginbtn alert-dismissible fade show" role="alert">
+            <strong>' . $msg . '</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+      }
+      ?>
+      <!-- end message -->
       <!-- Welcome element -->
       <div class="welcome_elem">
         <h1><b>Find out auctions near you!</b></h1>
@@ -37,6 +61,21 @@
       <div class="auctions_elem mt-2">
         <h1 class="mb-3"><b>Auctions we found in your area!</b></h1>
         <p>Carefully read the auction terms , some auction houses have <b>secret terms</b> and some might include a participation fee. Some might have transfer fees or some might charge shipping charges.</p>
+        <?php
+
+        if (isset($_SESSION['city'])) {
+
+          $sql = "SELECT * FROM auction WHERE auction_city='" . $_SESSION['city'] . "' ORDER BY auction_cap DESC";
+          // echo $sql;
+          $res = mysqli_query($link, $sql);
+          $i = 3;
+
+          while ($row = mysqli_fetch_assoc($res)) {
+            $i--;
+            if ($i == 0) {
+              break;
+            }
+            echo '
         <div class="auction_card">
           <div class="card mb-3 custom_card">
             <div class="row g-0">
@@ -45,15 +84,24 @@
               </div>
               <div class="col-md-7">
                 <div class="card-body">
-                  <h4 class="card-title"><b>Auction at Georgia state university county</b></h4>
-                  <p class="card-text">Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
-                  <button class="btn checkoutmore">View Auction</button>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <h4 class="card-title"><b>' . $row["auction_title"] . '</b></h4>
+                  <p class="card-text">' . $row["description"] . '</p>
+                  <a href="http://localhost/OnlineBidding/auction_view.php?id=' . $row["auction_id"] . '"><button class="btn checkoutmore">View Auction</button></a>
+                  <p class="card-text"><small class="text-muted">Valid till ' . $row["valid_date"] . '</small></p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      ';
+          }
+        }
+        else
+        {
+          echo "<h3>Login to view auctions</h3>";
+        }
+
+        ?>
       </div>
       <!-- End of auction near you element -->
 
@@ -61,47 +109,81 @@
       <div class="auctions_elem_1 mt-3">
         <h1 class="mb-3"><b>Auctions we found in your country!</b></h1>
         <p>Carefully read the auction terms , some auction houses have <b>secret terms</b> and some might include a participation fee. Some might have transfer fees or some might charge shipping charges. Although nationwide auctions are quite expensive to bid on but you could push your limits!.</p>
-        <div class="auction_card_1">
-          <div class="card mb-3 custom_card_1">
+        <?php
+        if($_SESSION["isset"]==true)
+        {
+        $sql = "SELECT * FROM auction WHERE auction_country='" . $_SESSION['country'] . "' ORDER BY auction_cap DESC";
+        // echo $sql;
+        $res = mysqli_query($link, $sql);
+        $i = 3;
+        while ($row = mysqli_fetch_assoc($res)) {
+          $i--;
+          if ($i == 0) {
+            break;
+          }
+          echo '
+        <div class="auction_card">
+          <div class="card mb-3 custom_card">
             <div class="row g-0">
               <div class="col-md-5">
-                <img src="https://source.unsplash.com/1600x900/?city,UK" class="card_img" alt="...">
+                <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
               </div>
               <div class="col-md-7">
                 <div class="card-body">
-                  <h4 class="card-title"><b>Auction at New-york county</b></h4>
-                  <p class="card-text">Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
-                  <button class="btn checkoutmore">View Auction</button>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <h4 class="card-title"><b>' . $row["auction_title"] . '</b></h4>
+                  <p class="card-text">' . $row["description"] . '</p>
+                  <a href="http://localhost/OnlineBidding/auction_view.php?id=' . $row["auction_id"] . '"><button class="btn checkoutmore">View Auction</button></a>
+                  <p class="card-text"><small class="text-muted">Valid till ' . $row["valid_date"] . '</small></p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      ';
+        }
+      }
+        else
+        {
+          echo "<h3>Login to view auctions</h3>";
+        }
+        ?>
       </div>
       <!-- End of auctions in your country -->
       <!-- Worldwide auctions -->
       <div class="auctions_elem_3 mt-3">
         <h1 class="mb-3"><b>Auctions Hosted Internationally</b></h1>
         <p>International auctions are far more expensive to bid upon, People around the globe bid for it. Carefully read the instructions of the auction before bidding</p>
-        <div class="auction_card_1">
-          <div class="card mb-3 custom_card">
-            <div class="row g-0">
-              <div class="col-md-5">
-                <img src="https://source.unsplash.com/1600x900/?Louvre,paris" class="card_img" alt="...">
-              </div>
-              <div class="col-md-7">
-                <div class="card-body">
-                  <h4 class="card-title"><b>Auction Louvre museum Paris</b></h4>
-                  <p class="card-text">Hey guys the auction is selling antique items of mussolini and hitler check out if you are interested.Special Offer for Hitlers cap worth $2500</p>
-                  <p id="demo"></p>
-                  <button class="btn checkoutmore">View Auction</button>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php
+         $sql = "SELECT * FROM auction ORDER BY auction_cap DESC";
+         // echo $sql;
+         $res = mysqli_query($link, $sql);
+         $i = 3;
+         while ($row = mysqli_fetch_assoc($res)) {
+           $i--;
+           if ($i == 0) {
+             break;
+           }
+           echo '
+           <div class="auction_card">
+             <div class="card mb-3 custom_card">
+               <div class="row g-0">
+                 <div class="col-md-5">
+                   <img src="https://source.unsplash.com/1600x900/?city,USA" class="card_img" alt="...">
+                 </div>
+                 <div class="col-md-7">
+                   <div class="card-body">
+                     <h4 class="card-title"><b>' . $row["auction_title"] . '</b></h4>
+                     <p class="card-text">' . $row["description"] . '</p>
+                     <a href="http://localhost/OnlineBidding/auction_view.php?id=' . $row["auction_id"] . '"><button class="btn checkoutmore">View Auction</button></a>
+                     <p class="card-text"><small class="text-muted">Valid till ' . $row["valid_date"] . '</small></p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         ';
+        }
+        ?>
       </div>
       <!-- End of world-wide auctions -->
       <!-- Host your auction -->
