@@ -65,6 +65,7 @@ ini_set('display_startup_errors', TRUE);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link type="text/css" href="Assets/Files/CSS/show_products.css" rel="stylesheet">
+    <link type="text/css" href="Assets/Files/CSS/home.css" rel="stylesheet">
     <script src="Assets/Files/JS/ws.js"></script>
     <title>Show Products</title>
 </head>

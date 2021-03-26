@@ -8,9 +8,9 @@ session_start();
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                     <li class="nav-item" style="width:120px">
                         <a class="nav-link active text-white" aria-current="page" href="host_auction.php">Host Auction</a>
-                    </li>
+                    </li> 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown
@@ -27,7 +27,24 @@ session_start();
 
                     if($_SESSION["isset"]==true)
                     {
-                        echo '<li style="margin-left: 500px;">
+                        $sql="SELECT money FROM user where user_id=".$_SESSION["user_id"];
+                        // echo $sql;
+                        $res=mysqli_query($link,$sql);
+                        // $sql1="SELECT "
+                        if($res)
+                        {
+                            while($row=mysqli_fetch_assoc($res))
+                            {
+                                $money=$row["money"];
+                            }
+                        }
+                        echo '<li style="width:120px">
+                        <p class="gradient-text-1" id="cur_money" style="font-size:22px;">$
+                        <b>'.$money.'</b>
+                        </p>
+                    </li>';
+                    
+                        echo '<li style="padding-left: 450px; margin-right:5px">
                         <a href="http://localhost/OnlineBidding/logout.php"><button type="button" class="btn checkoutmore">'.$_SESSION['username'].'</button></a>
                     </li>';
                     }

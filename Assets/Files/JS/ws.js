@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
   var conn = new WebSocket('ws://localhost:8080');
   conn.onopen = function (e) {
@@ -65,22 +67,30 @@ $(document).ready(function () {
   });
 
   $("#place_bid").click(function () {
-    alert("Do you want to place bid")
-    // make an ajax call from here to the websocket 
-    const queryString = window.location.search;
-    const urlParam = new URLSearchParams(queryString);
-    console.log(urlParam.get("id"));
-    // console.log(queryString);
-    var data1 = {
-      "type": "bidupdate",
-      "pid": urlParam.get("id"),
-      "uid": document.getElementById("uid").value,
-      "bid_amount": document.getElementById("current_bid").innerText
+    var amt = document.getElementById("cur_money").innerText
+    amt = parseInt(amt.slice(2, amt.length));
+    if (amt < parseInt(document.getElementById("current_bid").innerText)) {
+      console.log("Error ");
+      alert("You don't have enough money to place this bid");
     }
-    // console.log(data1);
-    conn.send(JSON.stringify(data1));
-    setTimeout(function(){location.reload()},200);
+    else {
+      alert("Do you want to place bid")
 
+      // make an ajax call from here to the websocket 
+      const queryString = window.location.search;
+      const urlParam = new URLSearchParams(queryString);
+      console.log(urlParam.get("id"));
+      // console.log(queryString);
+      var data1 = {
+        "type": "bidupdate",
+        "pid": urlParam.get("id"),
+        "uid": document.getElementById("uid").value,
+        "bid_amount": document.getElementById("current_bid").innerText
+      }
+      // console.log(data1);
+      conn.send(JSON.stringify(data1));
+      setTimeout(function () { location.reload() }, 200);
+    }
   })
 }
 )
