@@ -1,3 +1,4 @@
+
 <?php
 require_once("partial/_dbConnect.php");
     if(isset($_GET['id']))
@@ -21,6 +22,8 @@ require_once("partial/_dbConnect.php");
         header("location:http://localhost/OnlineBidding/index.php");
     }
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
