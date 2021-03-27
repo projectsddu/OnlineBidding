@@ -1,9 +1,53 @@
 <?php
 require_once("partial/_dbConnect.php");
 session_start();
+
+$msg = $aid = "";
+
+if (isset($_GET['msg'])) {
+    $msg = $_GET['msg'];
+}
+
+if (isset($_GET['aid'])) {
+    $aid = $_GET['aid'];
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    // echo "yes";
+    $product_name = $_POST["product_name"];
+    $product_description = $_POST["product_description"];
+    $base_bid = $_POST["base_bid"];
+
+    // echo $product_name." ".$product_description." ".$base_bid."<br>";
+
+    // validate all fields check that empty or not..
+
+    $flag = false;
+    if (strlen($product_name) == 0 || strlen($product_description) == 0 || strlen($base_bid) == 0) {
+        // echo "Fields can't be empty...";
+        header("location:add_products.php?aid=" . $_GET['aid'] . " && msg=" . "Fields can't be empty!");
+        $flag = true;
+    }
+
+    // validate base_bid
+    if (!is_numeric($base_bid)) {
+        // echo "bid amount must be numeric.";
+        header("location:add_products.php?aid=" . $_GET['aid'] . " && msg=" . "Bid amount must be numeric!!");
+        $flag = true;
+    }
+
+    // update database
+    if (!$flag) {
+        $sql = "INSERT INTO product (product_name, product_details, base_bid, auction_id) VALUES ('$product_name','$product_description','$base_bid',$aid)";
+        // echo $sql;
+        $res = mysqli_query($link, $sql);
+    }
+}
+
 if (isset($_GET["aid"])) {
     $sql = 'SELECT * FROM auction where user_id =' . $_SESSION["user_id"] . ' AND auction_id = ' . $_GET["aid"];
-    echo $sql;
+    // echo $sql;
     $res = mysqli_query($link, $sql);
     if (!$res) {
         header("location:index.php?msg=" . "Error finding you auction");
@@ -17,6 +61,9 @@ if (isset($_GET["aid"])) {
 } else {
     header("location:index.php?msg=" . "To add product it must contain auction id");
 }
+
+
+
 ?>
 
 <!doctype html>
@@ -30,6 +77,7 @@ if (isset($_GET["aid"])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link type="text/css" href="Assets/Files/CSS/home.css" rel="stylesheet">
+    <link type="text/css" href="Assets/Files/CSS/show_products.css" rel="stylesheet">
 
     <title>Home Page</title>
 </head>
@@ -38,34 +86,111 @@ if (isset($_GET["aid"])) {
     <?php
     include "Assets/Components/navbar.php";
     ?>
-    <div class="container">
-        <button type="button" class="btn loginbtn" data-bs-toggle="modal" data-bs-target="#product"> Add product </button>
+
+    <div class="container mt-3">
+        <?php
+        if ($msg != "") {
+            echo '<div class="alert loginbtn alert-dismissible fade show" role="alert">
+            <strong>' . $msg . '</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        ?>
     </div>
+
+    <!-- show products -->
+
+    <div class="col container mt-2">
+        <h2 class="m-2">Currently Added Products:</h2>
+        <span>
+            <div class="container m-4">
+            <button type="button" class="btn loginbtn" data-bs-toggle="modal" data-bs-target="#product"> Add product </button>
+            </div>
+        </span>
+        <?php
+        $sql = "SELECT * FROM product WHERE auction_id = " . $aid;
+        // echo $sql;
+        $res = mysqli_query($link, $sql);
+
+        if (mysqli_num_rows($res) == 0) {
+            echo '<div class="container mt-3"> 
+            <div class="alert loginbtn alert-dismissible fade show" role="alert">
+            <strong> No Products has been added yet..</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          </div>';
+        } else {
+            echo '<div class="alert login_hov_fill container fade show" role="alert">
+                    <div class="row">
+                        <div class="col-2 add_border">
+                            Product Name
+                        </div>
+                    
+                        <div class="col-2 add_border">
+                            Base Bid
+                        </div>
+                        <div class="col-2 add_border">
+                            Current Bid
+                        </div>
+                        <div class="col-2" style="margin-left: 50px;">
+                            View Product Page
+                        </div>
+                    </div>
+
+                </div>';
+
+            while ($row = mysqli_fetch_assoc($res)) {
+
+                echo '<div class="alert login_hov alert-dismissible fade show" role="alert">
+                    <div class="row">
+                        <div class="col-2 add_border">
+                            ' . $row["product_name"] . '
+                        </div>
+                    
+                        <div class="col-2 add_border" style="margin-left: 10px;">
+                        ' . $row["base_bid"] . '
+                        </div>
+                        <div class="col-2 add_border" style="margin-left: 25px;">
+                        ' . $row["current_bid"] . '
+                        </div>
+                        <div class="col-2 add_border " style="margin-left:-18px;">
+                            <a href="show_products.php?id=' . $row["product_id"] . '" > <button class="btn product_btn"> <b>View Product Page </b></button></a> 
+                        </div>
+                    </div>
+
+                </div>';
+            }
+        }
+
+        ?>
+    </div>
+
+
 
     <!-- Modal for adding products -->
     <div class="modal logmodal fade" id="product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content logform">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Add Product</b></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" class="" action="login_verify.php">
+                    <form method="POST" class="" action="<?php echo 'add_products.php?aid=' . $_GET['aid']; ?>" enctype='multipart/form-data'>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Product name:</label>
-                            <input type="text" class="form-control" id="username" name="prod_name">
+                            <label for="username" class="form-label"><b>Product Name:</b></label>
+                            <input type="text" class="form-control" id="username" name="product_name">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Product Description:</b></label>
-                            <textarea class="form-control txtarea" name="prod_desc" id="exampleFormControlTextarea1" rows="4"></textarea>
+                            <textarea class="form-control txtarea" name="product_description" id="exampleFormControlTextarea1" rows="4"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Base Bid</label>
-                            <input type="text" class="form-control" id="username" name="prod_name">
+                            <label for="username" class="form-label"><b>Base Bid:</b></label>
+                            <input type="text" class="form-control" id="username" name="base_bid">
                         </div>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Product photo</label>
+                            <label for="username" class="form-label"><b>Product Photo:</b></label>
                             <br><input type="file" />
                         </div>
 

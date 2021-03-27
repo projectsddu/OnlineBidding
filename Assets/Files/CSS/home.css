@@ -119,11 +119,25 @@ input[type=text]:focus{
     background-image: none;
     color: #ffffff;
 }
+.login_hov_fill{
+    margin-bottom: 1px;
+    background-color: #d8134e;
+    border: 2px solid #d8134e;
+    background-image: none;
+    color: #ffffff;
+}
 .search{
     
     color:#080808;
     /* border:1px solid white; */
     border-radius: 5px;
+    background-image: linear-gradient(45deg,#1b9e88,#18f160);
+}
+.product_btn {
+    color:#ffffff;
+    /* border:1px solid white; */
+    border-radius: 5px;
+    width: 250px;
     background-image: linear-gradient(45deg,#1b9e88,#18f160);
 }
 .auction_card_1{

@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 
                 add_auction($auction_name,$auction_description,$start_date,$end_date);
-                $msg="Your auction is successfully created";
+                header("loaction: add_products.php?msg="."Your auction is successfully created");
                 
             }
             else

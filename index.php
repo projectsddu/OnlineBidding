@@ -71,7 +71,7 @@ if (isset($_GET['msg'])) {
           $i = 3;
 
           while ($row = mysqli_fetch_assoc($res)) {
-            $i--;
+            // $i--;
             if ($i == 0) {
               break;
             }
@@ -117,7 +117,7 @@ if (isset($_GET['msg'])) {
         $res = mysqli_query($link, $sql);
         $i = 3;
         while ($row = mysqli_fetch_assoc($res)) {
-          $i--;
+          // $i--;
           if ($i == 0) {
             break;
           }
@@ -159,7 +159,7 @@ if (isset($_GET['msg'])) {
          $res = mysqli_query($link, $sql);
          $i = 3;
          while ($row = mysqli_fetch_assoc($res)) {
-           $i--;
+          //  $i--;
            if ($i == 0) {
              break;
            }
@@ -194,8 +194,9 @@ if (isset($_GET['msg'])) {
         <div class="card-body">
           <h5 class="card-title">Special Offers for auction out there</h5>
           <p class="card-text">Host your auctions at the cheapest price ever. Wanna Kick out your old and antique stuff at good price host a auction now </p>
-          <a href="#" class="btn loginbtn">Host Here</a>
+          <a href="host_auction.php" class="btn loginbtn">Host Here</a>
         </div>
+        
         <div class="card-footer text-muted">
           Special offer valid till today
         </div>

@@ -135,15 +135,19 @@ function check_dates($dt1,$dt2)
 
 
         include "partial/_dbConnect.php";
-        $sql="INSERT INTO auction (auction_id, user_id, valid_date, description, auction_cap, auction_city, auction_country, auction_title, start_date) VALUES (NULL, ".$_SESSION['user_id'].", '".$start_date."', '".$auction_description."', '0', '".$_SESSION['city']."', '".$_SESSION['country']."', 'desc', '".$end_date."')";
-        
+        $sql="INSERT INTO auction (auction_id, user_id, valid_date, description, auction_cap, auction_city, auction_country, auction_title, start_date) VALUES (NULL, ".$_SESSION['user_id'].", '".$end_date."', '".$auction_description."', 0, '".$_SESSION['city']."', '".$_SESSION['country']."', '$auction_name', '".$start_date."')";
+        // echo $sql;
         $sql1="INSERT INTO transaction (t_id,user_id,money,auction_id,credit_debit_status)VALUES (NULL,".$_SESSION['user_id'].",500,-1,1)";
         $res1=mysqli_query($link,$sql1);
 
         $res=mysqli_query($link,$sql);
-        if(!$res && !$res1)
+        if(!$res)
         {
-            echo "Errorrr!!!!!!!";
+            echo "Errorrr111111111111111111111111!!!!!!!";
+        }
+        if(!$res1)
+        {
+            echo "Errorrr22222222222222222222222!!!!!!!";
         }
     }
     
