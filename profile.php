@@ -35,6 +35,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location:host_auction.php?msg=" . "Fields cannot be empty!");
     }
 }
+
+// fetch username, money, city, country
+$sql = "SELECT * FROM user WHERE user_id = " . $_SESSION["user_id"];
+// echo $sql;
+
+$res = mysqli_query($link, $sql);
+
+if ($res) {
+    while ($row = mysqli_fetch_assoc($res)) {
+        $username = $row['username'];
+        $email = $row['email'];
+        $city = $row['city'];
+        $country = $row['country'];
+        $total_money = $row['money'];
+    }
+}
+
+// fetch number of auctions
+
+$sql1 = "SELECT * FROM auction WHERE user_id = " . $_SESSION["user_id"];
+// echo $sql1;
+$res1 = mysqli_query($link, $sql1);
+
+$auctions_count = mysqli_num_rows($res1);
+
+
+// fetch capitalization
+
+// fetch total amount currently in max_bid
+$sql1 = "SELECT SUM(current_bid) AS sum FROM product WHERE max_bid = " . $_SESSION["user_id"];
+// echo $sql1;
+$res1 = mysqli_query($link, $sql1);
+if ($res1) {
+    while ($row = mysqli_fetch_assoc($res1)) {
+        // store sunm
+        $sum = $row["sum"];
+    }
+} else {
+    echo "else innnnnnnnn";
+}
+
+
+
 ?>
 
 <!doctype html>
@@ -48,6 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link type="text/css" href="Assets/Files/CSS/home.css" rel="stylesheet">
+    <link type="text/css" href="Assets/Files/CSS/show_products.css" rel="stylesheet">
 
     <title>Home Page</title>
 </head>
@@ -56,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php
     include "Assets/Components/navbar.php";
     ?>
-    <div class="container">
+    <div class="container mb-4">
         <div class="profile mt-3 custom_card_1">
             <div class="row">
                 <div class="col-3 m-2">
@@ -85,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Name:
                             </div>
                             <div class="col-8">
-                                Jenil J Gandhi
+                                <?php echo $username; ?>
                             </div>
                         </div>
 
@@ -94,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Email:
                             </div>
                             <div class="col-8">
-                                jenilgandhi2111@gmail.com
+                                <?php echo $email; ?>
                             </div>
                         </div>
 
@@ -103,7 +147,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 City:
                             </div>
                             <div class="col-8">
-                                <?php echo $_SESSION["city"]; ?>
+                                <?php
+                                // echo $_SESSION["city"]; 
+                                ?>
+                                <?php echo $city; ?>
                             </div>
                         </div>
 
@@ -112,7 +159,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Country:
                             </div>
                             <div class="col-8">
-                                <?php echo $_SESSION["country"]; ?>
+                                <?php
+                                // echo $_SESSION["country"]; 
+                                ?>
+                                <?php echo $country; ?>
                             </div>
                         </div>
                         <div class="row rowcol">
@@ -120,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Auctions :
                             </div>
                             <div class="col-8">
-                                5
+                                <?php echo $auctions_count; ?>
                             </div>
                         </div>
 
@@ -129,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Total capitalization:
                             </div>
                             <div class="col-8">
-                                $35000
+                                <?php echo $sum; ?>
                             </div>
                         </div>
 
@@ -138,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Total A/C Balance:
                             </div>
                             <div class="col-8">
-                                $3527000
+                                <?php echo $total_money; ?>
                             </div>
                         </div>
 
@@ -147,8 +197,109 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </div>
             <hr>
-            <div class="col container mt-2">
-                <h2 class="m-2">Currently Active Auctions</h2>
+            <h2 class="m-2">Currently Active Auctions</h2>
+
+            <?php
+
+            $sql = "SELECT * FROM auction WHERE user_id = " . $_SESSION['user_id'] . " AND valid_date > '" . date("Y/m/d") . "'";
+            // echo $sql;
+            $res = mysqli_query($link, $sql);
+
+            if (mysqli_num_rows($res) == 0) {
+                // echo "there is no auction hosted by user.";
+                echo '<div class="container mt-3"> 
+                    <div class="alert loginbtn alert-dismissible fade show" role="alert">
+                    <strong> There is no auction hosted by user.</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                </div>';
+            } else {
+                echo '<div class="col container mt-2">
+                            
+                            <div class="alert login_hov alert-dismissible fade show" role="alert">
+                                <div class="row">
+                                    <div class="col-2">
+                                        Auction_name
+                                    </div>
+                                    <div class="col-2">
+                                        Auction_products
+                                    </div>
+                                    <div class="col-2">
+                                        Capitalization
+                                    </div>
+                                    <div class="col-2">
+                                        End Date
+                                    </div>
+                                    <div class="col-2">
+                                        Add products
+                                    </div>
+                                    <div class="col-2">
+                                        View auction page
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>';
+                while ($row = mysqli_fetch_assoc($res)) {
+
+                    // fetch no of products
+                    $sql2 = "SELECT * FROM product WHERE auction_id = " . $row['auction_id'];
+                    // echo $sql2; 
+                    $res2 = mysqli_query($link, $sql2);
+                    $no_of_products = mysqli_num_rows($res2);
+                    echo '<div class="col container mt-2">
+                            
+                            <div class="alert login_hov alert-dismissible fade show" role="alert">
+                                <div class="row">
+                                    <div class="col-2">
+                                        ' . $row["auction_title"] . '
+                                    </div>
+                                    <div class="col-2">
+                                        ' . $no_of_products . '
+                                    </div>
+                                    <div class="col-2">
+                                    ' . $row["auction_cap"] . '
+                                    </div>
+                                    <div class="col-2">
+                                    ' . $row["valid_date"] . '
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="add_products.php?aid=' . $row["auction_id"] . '" > <button class="btn add_product_btn" style="margin-right: 20px;"> <b>Add Product </b></button></a> 
+                                        </div>
+                                    <div class="col-2">
+                                    <a href="auction_view.php?id=' . $row["auction_id"] . '" > <button class="btn auction_btn" style="width: 180px;"> <b>View Auction</b></button></a> 
+                                    </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        ';
+                };
+            }
+
+            ?>
+            <hr>
+            <h2 class="m-4">Ended Auctions</h2>
+            <?php
+
+            $sql = "SELECT * FROM auction WHERE user_id = " . $_SESSION['user_id'] . " AND valid_date < '" . date("Y/m/d") . "'";
+            // echo $sql;
+            $res = mysqli_query($link, $sql);
+
+            if (mysqli_num_rows($res) == 0) {
+                // echo "there is no auction hosted by user.";
+                echo '<div class="container mt-3"> 
+                    <div class="alert loginbtn alert-dismissible fade show" role="alert">
+                    <strong> There is no auction hosted by user.</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                </div>';
+            } 
+            else {
+                echo '<div class="col container mt-2">
+                
                 <div class="alert login_hov alert-dismissible fade show" role="alert">
                     <div class="row">
                         <div class="col-2">
@@ -161,7 +312,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             Capitalization
                         </div>
                         <div class="col-2">
-                            Start from-to
+                            End Date
                         </div>
                         <div class="col-2">
                             Add products
@@ -172,59 +323,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                 </div>
+                
+            </div>';
+                while ($row = mysqli_fetch_assoc($res)) {
+
+                    // fetch no of products
+                    $sql2 = "SELECT * FROM product WHERE auction_id = " . $row['auction_id'];
+                    // echo $sql2; 
+                    $res2 = mysqli_query($link, $sql2);
+                    $no_of_products = mysqli_num_rows($res2);
+                    echo '<div class="col container mt-2">
+                
                 <div class="alert login_hov alert-dismissible fade show" role="alert">
                     <div class="row">
                         <div class="col-2">
-                            Auction_name
+                            ' . $row["auction_title"] . '
                         </div>
                         <div class="col-2">
-                            Auction_products
+                            ' . $no_of_products . '
                         </div>
                         <div class="col-2">
-                            Capitalization
+                        ' . $row["auction_cap"] . '
                         </div>
                         <div class="col-2">
-                            Start from-to
+                        ' . $row["valid_date"] . '
                         </div>
                         <div class="col-2">
-                            Add products
-                        </div>
+                            <a href="add_products.php?aid=' . $row["auction_id"] . '" > <button class="btn add_product_btn" style="margin-right: 20px;"> <b>Add Product </b></button></a> 
+                            </div>
                         <div class="col-2">
-                            View auction page
+                        <a href="auction_view.php?id=' . $row["auction_id"] . '" > <button class="btn auction_btn" style="width: 180px;"> <b>View Auction</b></button></a> 
+                        </div>
                         </div>
                     </div>
 
                 </div>
-            </div>
+                
+            ';
+                }
+                echo '</div>';
+                echo '</div>';
+            }
 
-            <div class="col">
-                <h2 class="m-4">Ended Auctions</h2>
-                <div class="col container">
-                <div class="alert login_hov alert-dismissible fade show" role="alert">
-                    <div class="row">
-                        <div class="col-2">
-                            Auction_name
-                        </div>
-                        <div class="col-2">
-                            Auction_products
-                        </div>
-                        <div class="col-2">
-                            Capitalization
-                        </div>
-                        <div class="col-2">
-                            Start from-to
-                        </div>
-                        <div class="col-2">
-                            Add products
-                        </div>
-                        <div class="col-2">
-                            View auction page
-                        </div>
-                    </div>
+            ?>
 
-                </div>
-                </div>
-            </div>
+
+
         </div>
     </div>
 
