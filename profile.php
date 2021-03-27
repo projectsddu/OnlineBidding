@@ -64,20 +64,40 @@ $auctions_count = mysqli_num_rows($res1);
 // fetch capitalization
 
 // fetch total amount currently in max_bid
-$sql1 = "SELECT SUM(current_bid) AS sum FROM product WHERE max_bid = " . $_SESSION["user_id"];
-// echo $sql1;
-$res1 = mysqli_query($link, $sql1);
-if ($res1) {
-    while ($row = mysqli_fetch_assoc($res1)) {
+// $sql1 = "SELECT SUM(current_bid) AS sum FROM product WHERE max_bid = " . $_SESSION["user_id"];
+// // echo $sql1;
+// $res1 = mysqli_query($link, $sql1);
+// if ($res1) {
+//     while ($row = mysqli_fetch_assoc($res1)) {
+//         // store sunm
+//         $sum = $row["sum"];
+//     }
+// } else {
+//     echo "else innnnnnnnn";
+// }
+
+$total_cap = 0;
+
+$sql5 = "SELECT SUM(current_bid) AS sum 
+        FROM (auction AS a INNER JOIN product AS p ON a.auction_id = p.auction_id)
+        WHERE user_id = ".$_SESSION['user_id'];
+        
+
+$res5 = mysqli_query($link,$sql5);
+
+if ($res5) {
+    while ($row = mysqli_fetch_assoc($res5)) {
         // store sunm
-        $sum = $row["sum"];
+        $total_cap= $row["sum"];
     }
 } else {
     echo "else innnnnnnnn";
 }
 
-
-
+if($total_cap == NULL)
+{
+    $total_cap = 0;
+}
 ?>
 
 <!doctype html>
@@ -104,9 +124,6 @@ if ($res1) {
         <div class="profile mt-3 custom_card_1">
             <div class="row">
                 <div class="col-3 m-2">
-
-
-
                     <div class="cont">
                         <img src="https://source.unsplash.com/1600x900/?city,USA" alt="Avatar" class="image">
                         <div class="middle">
@@ -179,7 +196,7 @@ if ($res1) {
                                 Total capitalization:
                             </div>
                             <div class="col-8">
-                                <?php echo $sum; ?>
+                                <?php echo $total_cap; ?>
                             </div>
                         </div>
 
@@ -209,14 +226,16 @@ if ($res1) {
                 // echo "there is no auction hosted by user.";
                 echo '<div class="container mt-3"> 
                     <div class="alert loginbtn alert-dismissible fade show" role="alert">
-                    <strong> There is no auction hosted by user.</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong> There is no auction hosted by user. &nbsp; &nbsp;
+                    <a href="host_auction.php"> <button class="btn add_product_btn" style="width: 200px;"> <b>Go to Host Auction</b></button></a>
+                    </strong>
+
                 </div>
                 </div>';
             } else {
                 echo '<div class="col container mt-2">
                             
-                            <div class="alert login_hov alert-dismissible fade show" role="alert">
+                            <div class="alert login_hov_fill alert-dismissible fade show" role="alert">
                                 <div class="row">
                                     <div class="col-2">
                                         Auction_name
@@ -248,6 +267,19 @@ if ($res1) {
                     // echo $sql2; 
                     $res2 = mysqli_query($link, $sql2);
                     $no_of_products = mysqli_num_rows($res2);
+
+                    $sql3 = "SELECT SUM(current_bid) AS sum FROM product WHERE auction_id = " . $row['auction_id'];
+                    // echo $sql1;
+                    $res3 = mysqli_query($link, $sql3);
+                    if ($res3) {
+                        while ($row3 = mysqli_fetch_assoc($res3)) {
+                            // store sunm
+                            $capital = $row3["sum"];
+                        }
+                    }
+                    else {
+                        echo "errorrrrrrrrrrrrrrrrrr";
+                    }
                     echo '<div class="col container mt-2">
                             
                             <div class="alert login_hov alert-dismissible fade show" role="alert">
@@ -259,7 +291,7 @@ if ($res1) {
                                         ' . $no_of_products . '
                                     </div>
                                     <div class="col-2">
-                                    ' . $row["auction_cap"] . '
+                                    ' . $capital . '
                                     </div>
                                     <div class="col-2">
                                     ' . $row["valid_date"] . '
@@ -292,15 +324,16 @@ if ($res1) {
                 // echo "there is no auction hosted by user.";
                 echo '<div class="container mt-3"> 
                     <div class="alert loginbtn alert-dismissible fade show" role="alert">
-                    <strong> There is no auction hosted by user.</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong> There is no auction hosted by user. &nbsp; &nbsp;
+                    <a href="host_auction.php"> <button class="btn add_product_btn" style="width: 200px;"> <b>Go to Host Auction</b></button></a>
+                    </strong>
+                
                 </div>
                 </div>';
-            } 
-            else {
+            } else {
                 echo '<div class="col container mt-2">
                 
-                <div class="alert login_hov alert-dismissible fade show" role="alert">
+                <div class="alert login_hov_fill alert-dismissible fade show" role="alert">
                     <div class="row">
                         <div class="col-2">
                             Auction_name
@@ -332,32 +365,46 @@ if ($res1) {
                     // echo $sql2; 
                     $res2 = mysqli_query($link, $sql2);
                     $no_of_products = mysqli_num_rows($res2);
+
+                    $sql3 = "SELECT SUM(current_bid) AS sum FROM product WHERE auction_id = " . $row['auction_id'];
+                    // echo $sql1;
+                    $res3 = mysqli_query($link, $sql3);
+                    if ($res3) {
+                        while ($row3 = mysqli_fetch_assoc($res3)) {
+                            // store sunm
+                            $capital = $row3["sum"];
+                        }
+                    }
+                    else {
+                        echo "errorrrrrrrrrrrrrrrrrr";
+                    }
+
                     echo '<div class="col container mt-2">
                 
-                <div class="alert login_hov alert-dismissible fade show" role="alert">
-                    <div class="row">
-                        <div class="col-2">
-                            ' . $row["auction_title"] . '
-                        </div>
-                        <div class="col-2">
-                            ' . $no_of_products . '
-                        </div>
-                        <div class="col-2">
-                        ' . $row["auction_cap"] . '
-                        </div>
-                        <div class="col-2">
-                        ' . $row["valid_date"] . '
-                        </div>
-                        <div class="col-2">
-                            <a href="add_products.php?aid=' . $row["auction_id"] . '" > <button class="btn add_product_btn" style="margin-right: 20px;"> <b>Add Product </b></button></a> 
+                        <div class="alert login_hov alert-dismissible fade show" role="alert">
+                            <div class="row">
+                                <div class="col-2">
+                                    ' . $row["auction_title"] . '
+                                </div>
+                                <div class="col-2">
+                                    ' . $no_of_products . '
+                                </div>
+                                <div class="col-2">
+                                ' . $capital . '
+                                </div>
+                                <div class="col-2">
+                                ' . $row["valid_date"] . '
+                                </div>
+                                <div class="col-2">
+                                    <a href="add_products.php?aid=' . $row["auction_id"] . '" > <button class="btn add_product_btn" style="margin-right: 20px;"> <b>Add Product </b></button></a> 
+                                    </div>
+                                <div class="col-2">
+                                <a href="auction_view.php?id=' . $row["auction_id"] . '" > <button class="btn auction_btn" style="width: 180px;"> <b>View Auction</b></button></a> 
+                                </div>
+                                </div>
                             </div>
-                        <div class="col-2">
-                        <a href="auction_view.php?id=' . $row["auction_id"] . '" > <button class="btn auction_btn" style="width: 180px;"> <b>View Auction</b></button></a> 
-                        </div>
-                        </div>
-                    </div>
 
-                </div>
+                        </div>
                 
             ';
                 }
