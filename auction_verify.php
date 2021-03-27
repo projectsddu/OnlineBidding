@@ -40,20 +40,20 @@ function check_dates($dt1,$dt2)
                         $res=mysqli_query($link,$sql);
 
                         // fetch total amount currently in max_bid
-                        $sql1="SELECT SUM(current_bid) AS sum FROM product WHERE max_bid = ".$_SESSION["user_id"];
-                        // echo $sql1;
-                        $res1 = mysqli_query($link, $sql1);
-                        if($res1)
-                        {
-                            while($row=mysqli_fetch_assoc($res1))
-                            {
-                                // store sunm
-                                $sum=$row["sum"];
-                            }
-                        }
-                        else {
-                            echo "else innnnnnnnn";
-                        }
+                        // $sql1="SELECT SUM(current_bid) AS sum FROM product WHERE max_bid = ".$_SESSION["user_id"];
+                        // // echo $sql1;
+                        // $res1 = mysqli_query($link, $sql1);
+                        // if($res1)
+                        // {
+                        //     while($row=mysqli_fetch_assoc($res1))
+                        //     {
+                        //         // store sunm
+                        //         $sum=$row["sum"];
+                        //     }
+                        // }
+                        // else {
+                        //     echo "else innnnnnnnn";
+                        // }
                         // echo $sum;
                         if($res)
                         {
@@ -65,15 +65,16 @@ function check_dates($dt1,$dt2)
                         }
 
                         // subtract
-                        $money = $money - $sum;
+                        $money = $money;
                         
                         if($option=="city")
                         {
                             $money=$money-500;
                             if($money>=0)
                             {
+                                echo $money;
                                 $mon=$money;
-                                $sql="UPDATE user SET money =".$mon." WHERE user_id=".$_SESSION["user_id"];
+                                $sql="UPDATE user SET money =".$money." WHERE user_id=".$_SESSION["user_id"];
                                 echo $sql;
                                 $res=mysqli_query($link,$sql);
                                 if(!$res)
@@ -93,8 +94,9 @@ function check_dates($dt1,$dt2)
                             $money=$money-2000;
                             if($money>=0)
                             {
+                                echo $money;
                                 $mon=$money;
-                                $sql="UPDATE user SET money =".$mon." WHERE user_id=".$_SESSION["user_id"];
+                                $sql="UPDATE user SET money =".$money." WHERE user_id=".$_SESSION["user_id"];
                                 $res=mysqli_query($link,$sql);
                                 if(!$res)
                                 {
@@ -112,8 +114,9 @@ function check_dates($dt1,$dt2)
                             $money=$money-5000;
                             if($money>=0)
                             {
+                                echo $money;
                                 $mon=$money;
-                                $sql="UPDATE user SET money =".$mon." WHERE user_id=".$_SESSION["user_id"];
+                                $sql="UPDATE user SET money =".$money." WHERE user_id=".$_SESSION["user_id"];
                                 $res=mysqli_query($link,$sql);
                                 if(!$res)
                                 {
@@ -130,12 +133,12 @@ function check_dates($dt1,$dt2)
                     }
                     
     }
-    function add_auction($auction_name,$auction_description,$start_date,$end_date)
+    function add_auction($auction_name,$auction_description,$start_date,$end_date,$reach)
     {
 
 
         include "partial/_dbConnect.php";
-        $sql="INSERT INTO auction (auction_id, user_id, valid_date, description, auction_cap, auction_city, auction_country, auction_title, start_date) VALUES (NULL, ".$_SESSION['user_id'].", '".$end_date."', '".$auction_description."', 0, '".$_SESSION['city']."', '".$_SESSION['country']."', '$auction_name', '".$start_date."')";
+        $sql="INSERT INTO auction (auction_id, user_id, valid_date, description, auction_cap, auction_city, auction_country, auction_title, start_date,reach) VALUES (NULL, ".$_SESSION['user_id'].", '".$end_date."', '".$auction_description."', 0, '".$_SESSION['city']."', '".$_SESSION['country']."', '$auction_name', '".$start_date."','$reach')";
         // echo $sql;
         $sql1="INSERT INTO transaction (t_id,user_id,money,auction_id,credit_debit_status)VALUES (NULL,".$_SESSION['user_id'].",500,-1,1)";
         $res1=mysqli_query($link,$sql1);

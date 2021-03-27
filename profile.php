@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (check_money($reach)) {
 
-                add_auction($auction_name, $auction_description, $start_date, $end_date);
+                add_auction($auction_name, $auction_description, $start_date, $end_date,$reach);
                 $msg = "Your auction is successfully created";
             } else {
                 header("location:host_auction.php?msg=" . "Not enough money to host this kind of auction try adding money");
@@ -276,6 +276,10 @@ if($total_cap == NULL)
                             // store sunm
                             $capital = $row3["sum"];
                         }
+                        if($capital==NULL)
+                        {
+                            $capital=0;
+                        }
                     }
                     else {
                         echo "errorrrrrrrrrrrrrrrrrr";
@@ -373,6 +377,10 @@ if($total_cap == NULL)
                         while ($row3 = mysqli_fetch_assoc($res3)) {
                             // store sunm
                             $capital = $row3["sum"];
+                        }
+                        if($capital==NULL)
+                        {
+                            $capital=0;
                         }
                     }
                     else {

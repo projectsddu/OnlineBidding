@@ -1,4 +1,7 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', TRUE);
+    ini_set('display_startup_errors', TRUE);
 require_once("partial/_dbConnect.php");
 session_start();
 // error_reporting(E_ALL);
@@ -26,8 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(check_money($reach))
             {
                 
-                add_auction($auction_name,$auction_description,$start_date,$end_date);
-                header("loaction: add_products.php?msg="."Your auction is successfully created");
+                add_auction($auction_name,$auction_description,$start_date,$end_date,$reach);
+                $sql="SELECT auction_id from auction WHERE auction_title='".$auction_name."'";
+                $res=mysqli_query($link,$sql);
+                while($row=mysqli_fetch_assoc($res))
+                {
+                    $aid=$row["auction_id"];
+                    break;
+                }
+                header("location:add_products.php?aid=" .$aid. " && msg=" . "Successfully created your auction");
+                echo "Auction is created";
                 
             }
             else

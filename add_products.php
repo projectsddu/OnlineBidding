@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
 require_once("partial/_dbConnect.php");
 session_start();
 
@@ -25,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $flag = false;
     if (strlen($product_name) == 0 || strlen($product_description) == 0 || strlen($base_bid) == 0) {
+
         // echo "Fields can't be empty...";
         header("location:add_products.php?aid=" . $_GET['aid'] . " && msg=" . "Fields can't be empty!");
         $flag = true;
@@ -39,9 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // update database
     if (!$flag) {
-        $sql = "INSERT INTO product (product_name, product_details, base_bid, auction_id) VALUES ('$product_name','$product_description','$base_bid',$aid)";
+        // $sql = "INSERT INTO product (product_name, product_details, base_bid, auction_id) VALUES ('$product_name','$product_description',".$base_bid.",".$aid.")";
+        $sql="INSERT INTO product (product_id, auction_id, product_name, product_details, base_bid, current_bid, max_bid) VALUES (NULL,$aid,'$product_name', '$product_description', $base_bid, 0, -1)";
         // echo $sql;
         $res = mysqli_query($link, $sql);
+        // var_dump($res);
     }
 }
 
@@ -50,6 +56,7 @@ if (isset($_GET["aid"])) {
     // echo $sql;
     $res = mysqli_query($link, $sql);
     if (!$res) {
+        // echo "Here errot";
         header("location:index.php?msg=" . "Error finding you auction");
     } else {
         $row = mysqli_num_rows($res);
@@ -57,6 +64,7 @@ if (isset($_GET["aid"])) {
             header("location:index.php?msg=" . "You cannot access other people's auction");
         }
         $aid = $_GET["aid"];
+        // echo "kono";
     }
 } else {
     header("location:index.php?msg=" . "To add product it must contain auction id");
