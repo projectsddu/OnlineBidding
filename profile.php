@@ -1,7 +1,7 @@
 <?php
 require_once("partial/_dbConnect.php");
 session_start();
-// error_reporting(E_ALL);
+// error_reporting(0);
 // ini_set('display_errors', TRUE);
 // ini_set('display_startup_errors', TRUE);
 $msg = "";
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $end_date = $_POST["end_date"];
     $reach = $_POST["option"];
 
-    // echo $auction_description.$auction_name.$start_date.$end_date."kljasndfjkasdnfk".$reach;
+    
     include "auction_verify.php";
     if (!is_empty($auction_name, $auction_description, $start_date, $end_date)) {
         if (check_dates($start_date, $end_date)) {
@@ -59,22 +59,6 @@ $sql1 = "SELECT * FROM auction WHERE user_id = " . $_SESSION["user_id"];
 $res1 = mysqli_query($link, $sql1);
 
 $auctions_count = mysqli_num_rows($res1);
-
-
-// fetch capitalization
-
-// fetch total amount currently in max_bid
-// $sql1 = "SELECT SUM(current_bid) AS sum FROM product WHERE max_bid = " . $_SESSION["user_id"];
-// // echo $sql1;
-// $res1 = mysqli_query($link, $sql1);
-// if ($res1) {
-//     while ($row = mysqli_fetch_assoc($res1)) {
-//         // store sunm
-//         $sum = $row["sum"];
-//     }
-// } else {
-//     echo "else innnnnnnnn";
-// }
 
 $total_cap = 0;
 
@@ -129,7 +113,7 @@ if($total_cap == NULL)
                         <div class="middle">
                             <div class="text">
                                 <div class="upload-btn-wrapper">
-                                    <button class="btn btn1">Change profile image</button>
+                                    <button class="btn btn1">Change Profile Image</button>
                                     <input type="file" name="myfile" />
                                 </div>
 
@@ -164,9 +148,6 @@ if($total_cap == NULL)
                                 City:
                             </div>
                             <div class="col-8">
-                                <?php
-                                // echo $_SESSION["city"]; 
-                                ?>
                                 <?php echo $city; ?>
                             </div>
                         </div>
@@ -176,15 +157,12 @@ if($total_cap == NULL)
                                 Country:
                             </div>
                             <div class="col-8">
-                                <?php
-                                // echo $_SESSION["country"]; 
-                                ?>
                                 <?php echo $country; ?>
                             </div>
                         </div>
                         <div class="row rowcol">
                             <div class="col-4">
-                                Auctions :
+                                Auctions:
                             </div>
                             <div class="col-8">
                                 <?php echo $auctions_count; ?>
@@ -193,7 +171,7 @@ if($total_cap == NULL)
 
                         <div class="row rowcol">
                             <div class="col-4">
-                                Total capitalization:
+                                Total Capitalization:
                             </div>
                             <div class="col-8">
                                 <?php echo $total_cap; ?>
@@ -238,22 +216,22 @@ if($total_cap == NULL)
                             <div class="alert login_hov_fill alert-dismissible fade show" role="alert">
                                 <div class="row">
                                     <div class="col-2">
-                                        Auction_name
+                                        <b>Auction Name</b>
                                     </div>
                                     <div class="col-2">
-                                        Auction_products
+                                        <b>Auction Products</b>
                                     </div>
                                     <div class="col-2">
-                                        Capitalization
+                                        <b>Capitalization</b>
                                     </div>
                                     <div class="col-2">
-                                        End Date
+                                        <b>End Date</b>
                                     </div>
                                     <div class="col-2">
-                                        Add products
+                                        <b>Add Products</b>
                                     </div>
                                     <div class="col-2">
-                                        View auction page
+                                        <b>View Auction</b>
                                     </div>
                                 </div>
 
@@ -340,22 +318,22 @@ if($total_cap == NULL)
                 <div class="alert login_hov_fill alert-dismissible fade show" role="alert">
                     <div class="row">
                         <div class="col-2">
-                            Auction_name
+                            <b>Auction Name</b>
                         </div>
                         <div class="col-2">
-                            Auction_products
+                            <b>Auction Products</b>
                         </div>
                         <div class="col-2">
-                            Capitalization
+                            <b>Capitalization</b>
                         </div>
                         <div class="col-2">
-                            End Date
+                            <b>End Date</b>
                         </div>
                         <div class="col-2">
-                            Add products
+                            <b>Add Products</b>
                         </div>
                         <div class="col-2">
-                            View auction page
+                            <b>View Auction</b>
                         </div>
                     </div>
 

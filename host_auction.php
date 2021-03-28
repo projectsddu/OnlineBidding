@@ -1,12 +1,9 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', TRUE);
-    ini_set('display_startup_errors', TRUE);
-require_once("partial/_dbConnect.php");
-session_start();
 // error_reporting(E_ALL);
 // ini_set('display_errors', TRUE);
 // ini_set('display_startup_errors', TRUE);
+require_once("partial/_dbConnect.php");
+session_start();
 $msg = "";
 
 if (isset($_GET['msg'])) {
@@ -30,25 +27,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 
                 add_auction($auction_name,$auction_description,$start_date,$end_date,$reach);
-                $sql="SELECT auction_id from auction WHERE auction_title='".$auction_name."'";
-                $res=mysqli_query($link,$sql);
-                while($row=mysqli_fetch_assoc($res))
+                $sql = "SELECT auction_id from auction WHERE auction_title = '".$auction_name."'";
+                $res = mysqli_query($link,$sql);
+                while($row = mysqli_fetch_assoc($res))
                 {
-                    $aid=$row["auction_id"];
+                    $aid = $row["auction_id"];
                     break;
                 }
-                header("location:add_products.php?aid=" .$aid. " && msg=" . "Successfully created your auction");
+                header("location:add_products.php?aid=" .$aid. " && msg=" . "Successfully created your auction!!");
                 echo "Auction is created";
                 
             }
             else
             {
-                header("location:host_auction.php?msg=" . "Not enough money to host this kind of auction try adding money");
+                header("location:host_auction.php?msg=" . "Not enough money to host this kind of auction try adding money..");
             }
         }
         else
         {
-            header("location:host_auction.php?msg=" . "Start date cannot be greater than end date");
+            header("location:host_auction.php?msg=" . "Start date cannot be greater than end date..");
         }
     } 
     else 

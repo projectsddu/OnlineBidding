@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // update database
     if (!$flag) {
-        // $sql = "INSERT INTO product (product_name, product_details, base_bid, auction_id) VALUES ('$product_name','$product_description',".$base_bid.",".$aid.")";
         $sql="INSERT INTO product (product_id, auction_id, product_name, product_details, base_bid, current_bid, max_bid) VALUES (NULL,$aid,'$product_name', '$product_description', $base_bid, 0, -1)";
         // echo $sql;
         $res = mysqli_query($link, $sql);
@@ -57,17 +56,17 @@ if (isset($_GET["aid"])) {
     $res = mysqli_query($link, $sql);
     if (!$res) {
         // echo "Here errot";
-        header("location:index.php?msg=" . "Error finding you auction");
+        header("location:index.php?msg=" . "Error finding you auction.");
     } else {
         $row = mysqli_num_rows($res);
         if ($row <= 0) {
-            header("location:index.php?msg=" . "You cannot access other people's auction");
+            header("location:index.php?msg=" . "You cannot access other people's auction.");
         }
         $aid = $_GET["aid"];
         // echo "kono";
     }
 } else {
-    header("location:index.php?msg=" . "To add product it must contain auction id");
+    header("location:index.php?msg=" . "To add product it must contain auction id.");
 }
 
 
@@ -131,17 +130,17 @@ if (isset($_GET["aid"])) {
             echo '<div class="alert login_hov_fill container fade show" role="alert">
                     <div class="row">
                         <div class="col-2 add_border">
-                            Product Name
+                            <b>Product Name</b>
                         </div>
                     
                         <div class="col-2 add_border">
-                            Base Bid
+                            <b>Base Bid</b>
                         </div>
                         <div class="col-2 add_border">
-                            Current Bid
+                            <b>Current Bid</b>
                         </div>
                         <div class="col-2" style="margin-left: 50px;">
-                            View Product Page
+                            <b>View Product Page</b>
                         </div>
                     </div>
 
