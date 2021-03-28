@@ -9,7 +9,7 @@ define('DB_NAME', 'DM_PROJECT');
 
 // try to connect databse
 
-use mysqli;
+// use mysqli;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
@@ -66,7 +66,7 @@ class Auction implements MessageComponentInterface
 
             $sql = "UPDATE product SET current_bid = " . $bid_amount . " , max_bid = " . $uid . " WHERE product_id = " . $pid;
             // echo $sql;
-            $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            $link = mysqli_connect('127.0.0.1', DB_USERNAME, DB_PASSWORD, DB_NAME);
 
             // check connection
 
