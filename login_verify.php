@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
     require("partial/_dbConnect.php");
     if($_SERVER["SERVER_METHOD"] == "GET")
     {
@@ -8,6 +9,7 @@
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $password = md5($password);
         $sql = "SELECT * FROM user WHERE username = '".$username."' AND password = '".$password."'";
         $res = mysqli_query($link,$sql);
         if(mysqli_num_rows($res) == 1)

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require_once("partial/_dbConnect.php");
 session_start();
 // error_reporting(0);

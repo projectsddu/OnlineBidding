@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+
 session_start();
 require_once("partial/_dbConnect.php");
     if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -14,7 +16,7 @@ require_once("partial/_dbConnect.php");
         $sql = "UPDATE user SET money = ".$total_money." WHERE user_id = ".$_SESSION['user_id'];
         // echo $sql;
         $res = mysqli_query($link,$sql);
-        $sql1 = "INSERT INTO transaction (t_id,user_id,money,auction_id,credit_debit_status) VALUES (NULL,".$_SESSION['user_id'].",".abs($_POST['money']).",1,1)";
+        $sql1 = "INSERT INTO transaction (t_id,user_id,money,auction_id,credit_debit_status) VALUES (NULL,".$_SESSION['user_id'].",".abs($_POST['money']).",1,0)";
         
         $res1 = mysqli_query($link,$sql1);
         if(!$res and !$res1)

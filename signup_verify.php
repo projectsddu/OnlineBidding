@@ -1,7 +1,8 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
+error_reporting(0);
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
+// ini_set('display_startup_errors', TRUE);
 function isEmptyData($username, $city, $country, $password, $c_password)
 {
     if (empty($username) || empty($city) || empty($country) || empty($password) || empty($c_password)) {
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (!$link) {
             die('ERROR: Could not connect' . mysqli_connect_error());
         }
-
+        $password = md5($password);
         $sql = "INSERT INTO user (username, password, email, city, country, money) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $city . "', '" . $country . "', 0)";
         // echo $sql;
         $res = mysqli_query($link, $sql);
