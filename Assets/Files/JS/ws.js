@@ -84,7 +84,6 @@ $(document).ready(function () {
         "uid": document.getElementById("uid").value,
         "bid_amount": document.getElementById("current_bid").innerText
       }
-      // console.log(data1);
       conn.send(JSON.stringify(data1));
       setTimeout(function () { location.reload() }, 200);
     }
