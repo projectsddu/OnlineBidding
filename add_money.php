@@ -16,7 +16,7 @@ while($row=mysqli_fetch_assoc($res))
 {
     $money=$row["money"];
 }
-// echo $money;
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -82,28 +82,28 @@ while($row=mysqli_fetch_assoc($res))
             </div>
             <!-- End of add money -->
         </div>
-        <div class="row m-1 auctions_elem_1  mt-2" style="width:1070px">
+        <div class="row m-1 auctions_elem_1  mt-4" style="width:1070px">
             <div class="col">
                 <div class="row">
                     <h3 id="bid_lead">Your Transactions</h3>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                 <!-- Showing transactions -->
-                <div class="col container mt-2">
+                <div class="col container mt-4">
                             
                             <div class="alert login_hov_fill alert-dismissible fade show" role="alert">
                                 <div class="row">
                                     <div class="col-3">
-                                        Transaction Id
+                                        <b>Transaction Id</b>
                                     </div>
                                     <div class="col-3">
-                                        Date 
+                                        <b>Date</b>
                                     </div>
                                     <div class="col-3">
-                                        Amount
+                                        <b>Amount</b>
                                     </div>
                                     <div class="col-3">
-                                        Debit/Credit
+                                        <b>Debit/Credit</b>
                                     </div>
                                     
                                 </div>
@@ -114,14 +114,46 @@ while($row=mysqli_fetch_assoc($res))
 
 
 
-                        <div class="col container mt-2">
+                        <div class=" container mt-2">
                             
+                            
+                            <?php
+                            $sql="SELECT * FROM transaction WHERE user_id=".$_SESSION["user_id"]." ORDER BY t_id DESC";
+                            $res=mysqli_query($link,$sql);
+                            while($row=mysqli_fetch_assoc($res))
+                            {
+                                if($row["credit_debit_status"]==0)
+                                {
+                                    $dbstat="Credit";
+                                }
+                                else
+                                {
+                                    $dbstat="Debit";
+                                }
+                            echo '
                             <div class="alert login_hov alert-dismissible fade show" role="alert">
-                                
+                            <div class="row">
+                                    <div class="col-3">
+                                        '.$row["t_id"].'
+                                    </div>
+                                    <div class="col-3">
+                                        '.date("Y/m/d").'
+                                    </div>
+                                    <div class="col-3">
+                                        '.$row["money"].'
+                                    </div>
+                                    <div class="col-3">
+                                        '.$dbstat.'
+                                    </div>
+                                    
+                                </div>
                             </div>
-                            
+                        
+                            ';
+                            }
+                           ?> 
                 <!-- End of showing transactions -->
-                </div>
+               
             </div>
         </div>
 
