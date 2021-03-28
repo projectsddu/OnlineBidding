@@ -1,7 +1,7 @@
 
 <?php
-
-if($_SESSION["isset"]!=true)
+session_start();
+if(!isset($_SESSION["user_id"]))
 {
     header("location:index.php?msg="."Login to view auctions");
 }
