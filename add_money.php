@@ -82,6 +82,48 @@ while($row=mysqli_fetch_assoc($res))
             </div>
             <!-- End of add money -->
         </div>
+        <div class="row m-1 auctions_elem_1  mt-2" style="width:1070px">
+            <div class="col">
+                <div class="row">
+                    <h3 id="bid_lead">Your Transactions</h3>
+                </div>
+                <div class="row">
+                <!-- Showing transactions -->
+                <div class="col container mt-2">
+                            
+                            <div class="alert login_hov_fill alert-dismissible fade show" role="alert">
+                                <div class="row">
+                                    <div class="col-3">
+                                        Transaction Id
+                                    </div>
+                                    <div class="col-3">
+                                        Date 
+                                    </div>
+                                    <div class="col-3">
+                                        Amount
+                                    </div>
+                                    <div class="col-3">
+                                        Debit/Credit
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+
+
+                        <div class="col container mt-2">
+                            
+                            <div class="alert login_hov alert-dismissible fade show" role="alert">
+                                
+                            </div>
+                            
+                <!-- End of showing transactions -->
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- Add money page ends here -->
