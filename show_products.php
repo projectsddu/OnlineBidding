@@ -1,30 +1,30 @@
 <?php
 
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
+// ini_set('display_startup_errors', TRUE);
     require_once("partial/_dbConnect.php");
     if(isset($_GET['id']))
     {
-        $sql="SELECT * FROM product WHERE product_id=".$_GET["id"];
-        $res=mysqli_query($link,$sql);
-        while($row=mysqli_fetch_assoc($res))
+        $sql = "SELECT * FROM product WHERE product_id = ".$_GET["id"];
+        $res = mysqli_query($link,$sql);
+        while($row = mysqli_fetch_assoc($res))
         {
-            $title=$row['product_name'];
-            $desc=$row["product_details"];
-            $base_bid=$row["base_bid"];
-            $current_bid=$row["current_bid"];
-            $auction_id=$row["auction_id"];
-            $max_bidder=$row["max_bid"];
+            $title = $row['product_name'];
+            $desc = $row["product_details"];
+            $base_bid = $row["base_bid"];
+            $current_bid = $row["current_bid"];
+            $auction_id = $row["auction_id"];
+            $max_bidder = $row["max_bid"];
         }
-        $sql1="SELECT * FROM auction WHERE auction_id=".$auction_id;
-        $res=mysqli_query($link,$sql1);
-        while($row=mysqli_fetch_assoc($res))
+        $sql1 = "SELECT * FROM auction WHERE auction_id = ".$auction_id;
+        $res = mysqli_query($link,$sql1);
+        while($row = mysqli_fetch_assoc($res))
         {
-            $city=$row["auction_city"];
-            $country=$row["auction_country"];
-            $seller=$row["user_id"];
+            $city = $row["auction_city"];
+            $country = $row["auction_country"];
+            $seller = $row["user_id"];
         }
 
     }
@@ -35,18 +35,18 @@ ini_set('display_startup_errors', TRUE);
     function getUsernameById($user_id)
     {
         require("partial/_dbConnect.php");
-        $sql="SELECT username from user WHERE user_id=".$user_id;
-        $res=mysqli_query($link,$sql);
+        $sql = "SELECT username from user WHERE user_id=".$user_id;
+        $res = mysqli_query($link,$sql);
         if(!$res)
         {
             return false;
         }
         else
         {
-            $uname="";
-            while($row=mysqli_fetch_assoc($res))
+            $uname = "";
+            while($row = mysqli_fetch_assoc($res))
             {
-                $uname=$row["username"];
+                $uname = $row["username"];
 
             }
             return $uname;
@@ -90,7 +90,7 @@ ini_set('display_startup_errors', TRUE);
                                     <p class="card-text" id="base_p"><b >Base Price</b>:$<?php echo $base_bid;?></p>
                                     <p class="card-text"><b>Max bidder:</b> <?php
                                     
-                                        if($max_bidder==-1)
+                                        if($max_bidder == -1)
                                         {
                                             echo "No bidder";
                                         }
@@ -123,13 +123,13 @@ ini_set('display_startup_errors', TRUE);
                             <div class="col-4" ><b>Current Bid: $</b></div>
                             <div class="col-6" style="margin-left:-50px" id="current_bid"><?php
                             
-                            if($current_bid==0)
+                            if($current_bid == 0)
                             {
                                 echo $base_bid;
                             }
                             else
                             {
-                                echo (int)($current_bid+$current_bid*0.1);
+                                echo (int)($current_bid + $current_bid * 0.1);
                             }
                             
                             ?></div>

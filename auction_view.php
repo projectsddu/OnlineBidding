@@ -3,14 +3,14 @@
 require_once("partial/_dbConnect.php");
     if(isset($_GET['id']))
     {
-        $sql="SELECT * FROM auction WHERE auction_id=".$_GET['id'];
-        $res=mysqli_query($link,$sql);
-        while($row=mysqli_fetch_assoc($res))
+        $sql = "SELECT * FROM auction WHERE auction_id = ".$_GET['id'];
+        $res = mysqli_query($link,$sql);
+        while($row = mysqli_fetch_assoc($res))
         {
-            $title=$row["auction_title"];
-            $desc=$row["description"];
+            $title = $row["auction_title"];
+            $desc = $row["description"];
         }
-        if(mysqli_num_rows($res)==0)
+        if(mysqli_num_rows($res) == 0)
         {
 
             header("location:http://localhost/OnlineBidding/index.php");
@@ -49,10 +49,10 @@ require_once("partial/_dbConnect.php");
                 <p><?php echo $desc; ?></p>
                 <?php
 
-                $sql="SELECT * FROM product WHERE auction_id=".$_GET['id'];
+                $sql = "SELECT * FROM product WHERE auction_id = ".$_GET['id'];
                 // echo $sql;
-                $result=mysqli_query($link,$sql);
-                while($row=mysqli_fetch_assoc($result))
+                $result = mysqli_query($link,$sql);
+                while($row = mysqli_fetch_assoc($result))
                 {
                 echo '<div class="auction_card">
                     <div class="card mb-3 custom_card">

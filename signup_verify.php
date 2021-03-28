@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_SESSION["country"] = $country;
             $sql = "SELECT * FROM user WHERE username = '".$username."'";
             $res = mysqli_query($link,$sql);
-            while($row=mysqli_fetch_assoc($res))
+            while($row = mysqli_fetch_assoc($res))
             {
                 $_SESSION['user_id'] = $row["user_id"];
             }

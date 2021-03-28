@@ -16,7 +16,7 @@ session_start();
                             Dropdown
                         </a>
                         <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item text-success" href="#"><b>Profile</a></b></li>
+                            <li><a class="dropdown-item text-success" href="profile.php"><b>Profile</a></b></li>
                             <li><a class="dropdown-item text-success" href="add_money.php"><b>Add Money</a></b></li>
                             <li>
                                 <hr class="dropdown-divider">

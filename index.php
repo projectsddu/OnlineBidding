@@ -65,13 +65,13 @@ if (isset($_GET['msg'])) {
 
         if (isset($_SESSION['city'])) {
 
-          $sql = "SELECT * FROM auction WHERE auction_city='" . $_SESSION['city'] . "' ORDER BY auction_cap DESC";
+          $sql = "SELECT * FROM auction WHERE auction_city='" . $_SESSION['city'] . "' AND reach='city' ORDER BY auction_cap DESC";
           // echo $sql;
           $res = mysqli_query($link, $sql);
           $i = 3;
 
           while ($row = mysqli_fetch_assoc($res)) {
-            $i--;
+            // $i--;
             if ($i == 0) {
               break;
             }
@@ -112,12 +112,12 @@ if (isset($_GET['msg'])) {
         <?php
         if($_SESSION["isset"]==true)
         {
-        $sql = "SELECT * FROM auction WHERE auction_country='" . $_SESSION['country'] . "' ORDER BY auction_cap DESC";
+        $sql = "SELECT * FROM auction WHERE auction_country='" . $_SESSION['country'] . "' AND reach='country' ORDER BY auction_cap DESC";
         // echo $sql;
         $res = mysqli_query($link, $sql);
         $i = 3;
         while ($row = mysqli_fetch_assoc($res)) {
-          $i--;
+          // $i--;
           if ($i == 0) {
             break;
           }
@@ -154,12 +154,12 @@ if (isset($_GET['msg'])) {
         <h1 class="mb-3"><b>Auctions Hosted Internationally</b></h1>
         <p>International auctions are far more expensive to bid upon, People around the globe bid for it. Carefully read the instructions of the auction before bidding</p>
         <?php
-         $sql = "SELECT * FROM auction ORDER BY auction_cap DESC";
+         $sql = "SELECT * FROM auction WHERE reach='world' ORDER BY auction_cap DESC";
          // echo $sql;
          $res = mysqli_query($link, $sql);
          $i = 3;
          while ($row = mysqli_fetch_assoc($res)) {
-           $i--;
+          //  $i--;
            if ($i == 0) {
              break;
            }
@@ -194,8 +194,9 @@ if (isset($_GET['msg'])) {
         <div class="card-body">
           <h5 class="card-title">Special Offers for auction out there</h5>
           <p class="card-text">Host your auctions at the cheapest price ever. Wanna Kick out your old and antique stuff at good price host a auction now </p>
-          <a href="#" class="btn loginbtn">Host Here</a>
+          <a href="host_auction.php" class="btn loginbtn">Host Here</a>
         </div>
+        
         <div class="card-footer text-muted">
           Special offer valid till today
         </div>
