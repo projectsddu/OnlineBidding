@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2021 at 05:14 PM
+-- Generation Time: Mar 28, 2021 at 09:18 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -35,16 +35,18 @@ CREATE TABLE `auction` (
   `auction_cap` int(11) NOT NULL,
   `auction_city` varchar(50) NOT NULL,
   `auction_country` varchar(50) NOT NULL,
-  `auction_title` varchar(150) NOT NULL
+  `auction_title` varchar(150) NOT NULL,
+  `start_date` date NOT NULL,
+  `reach` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `auction`
 --
 
-INSERT INTO `auction` (`auction_id`, `user_id`, `valid_date`, `description`, `auction_cap`, `auction_city`, `auction_country`, `auction_title`) VALUES
-(1, 12, '2021-04-02', 'Selling Hilter\'s cap worth 1500$ Interested buyers please attend the auction here', 140000, 'Ahmedabad', 'India', 'Auction at Ahmedabad University'),
-(2, 15, '2021-04-01', 'Kuch nahi sujh raha hai kuch bhi hai yeh', 125000, 'Ahmedabad', 'India', 'Auction at Nirma university');
+INSERT INTO `auction` (`auction_id`, `user_id`, `valid_date`, `description`, `auction_cap`, `auction_city`, `auction_country`, `auction_title`, `start_date`, `reach`) VALUES
+(40, 7, '2021-04-11', 'DAIICT is user friendly website', 0, 'Ahmedabad', 'India', 'DAIICT auction', '2021-03-17', 'world'),
+(41, 8, '2021-04-23', 'test desc', 0, 'Ahmedabad', 'India', 'test auction', '2021-04-03', 'country');
 
 -- --------------------------------------------------------
 
@@ -58,16 +60,17 @@ CREATE TABLE `product` (
   `product_name` varchar(50) NOT NULL,
   `product_details` varchar(200) NOT NULL,
   `base_bid` int(11) NOT NULL,
-  `current_bid` int(11) NOT NULL
+  `current_bid` int(11) NOT NULL,
+  `max_bid` int(11) NOT NULL DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `auction_id`, `product_name`, `product_details`, `base_bid`, `current_bid`) VALUES
-(1, 2, 'Hitler\'s Cap', 'This is hitlers cap', 8000, 0),
-(2, 2, 'Oppo old phone', 'Ahmedabad details', 2300, 3400);
+INSERT INTO `product` (`product_id`, `auction_id`, `product_name`, `product_details`, `base_bid`, `current_bid`, `max_bid`) VALUES
+(11, 40, 'Testing', 'Testing', 12000, 12000, 7),
+(12, 41, 'test product', 'Test desc', 12345, 20164, 7);
 
 -- --------------------------------------------------------
 
@@ -83,6 +86,21 @@ CREATE TABLE `transaction` (
   `credit_debit_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`t_id`, `user_id`, `money`, `auction_id`, `credit_debit_status`) VALUES
+(54, 7, 55000, 1, 1),
+(55, 7, 1000, 1, 0),
+(56, 7, 15000, 1, 0),
+(57, 7, 500, -1, 1),
+(58, 8, 5000, 1, 0),
+(59, 8, 500, -1, 1),
+(60, 8, 2500000, 1, 0),
+(61, 7, 50000, 1, 0),
+(62, 7, 80000, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -92,7 +110,7 @@ CREATE TABLE `transaction` (
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` text NOT NULL,
   `email` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `country` varchar(50) NOT NULL,
@@ -104,7 +122,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `city`, `country`, `money`) VALUES
-(1, 'jenil', 'jenil', 'j@j.com', 'Ahmedabad', 'India', 500000);
+(7, 'jenil', 'c213dde86be2b819ddb0af0d6a2ca0c9', 'jenil@jenil.com', 'Ahmedabad', 'India', 103000),
+(8, 'keval', '73b6cf25fc26988d03914072cab9a6ff', 'keval@k.com', 'Ahmedabad', 'India', 2503000),
+(9, 'testdummy', '6afaef1f754d434e713f89fb58a3d718', 'jenil@j.com', 'Ahmedabad', 'India', 0);
 
 --
 -- Indexes for dumped tables
@@ -142,25 +162,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `auction`
 --
 ALTER TABLE `auction`
-  MODIFY `auction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `auction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
