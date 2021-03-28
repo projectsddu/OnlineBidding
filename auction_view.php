@@ -1,5 +1,10 @@
 
 <?php
+
+if($_SESSION["isset"]!=true)
+{
+    header("location:index.php?msg="."Login to view auctions");
+}
 require_once("partial/_dbConnect.php");
     if(isset($_GET['id']))
     {

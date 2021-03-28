@@ -65,7 +65,7 @@ if (isset($_GET['msg'])) {
 
         if (isset($_SESSION['city'])) {
 
-          $sql = "SELECT * FROM auction WHERE auction_city='" . $_SESSION['city'] . "' AND reach='city' ORDER BY auction_cap DESC";
+          $sql = "SELECT * FROM auction WHERE auction_city='" . $_SESSION['city'] . "' AND reach='city' AND valid_date>=".date("Y-m-d")."  ORDER BY auction_cap DESC";
           // echo $sql;
           $res = mysqli_query($link, $sql);
           $i = 3;
@@ -112,7 +112,7 @@ if (isset($_GET['msg'])) {
         <?php
         if($_SESSION["isset"]==true)
         {
-        $sql = "SELECT * FROM auction WHERE auction_country='" . $_SESSION['country'] . "' AND reach='country' ORDER BY auction_cap DESC";
+        $sql = "SELECT * FROM auction WHERE auction_country='" . $_SESSION['country'] . "' AND reach='country' AND valid_date>=".date("Y-m-d")."  ORDER BY auction_cap DESC";
         // echo $sql;
         $res = mysqli_query($link, $sql);
         $i = 3;
@@ -154,7 +154,7 @@ if (isset($_GET['msg'])) {
         <h1 class="mb-3"><b>Auctions Hosted Internationally</b></h1>
         <p>International auctions are far more expensive to bid upon, People around the globe bid for it. Carefully read the instructions of the auction before bidding</p>
         <?php
-         $sql = "SELECT * FROM auction WHERE reach='world' ORDER BY auction_cap DESC";
+         $sql = "SELECT * FROM auction WHERE reach='world' AND valid_date>=".date("Y-m-d")." ORDER BY auction_cap DESC ";
          // echo $sql;
          $res = mysqli_query($link, $sql);
          $i = 3;

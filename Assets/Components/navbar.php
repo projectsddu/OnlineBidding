@@ -8,12 +8,17 @@ session_start();
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                     <li class="nav-item" style="width:120px">
+                     ';
+
+                    if($_SESSION["isset"]==true)
+                    {
+                        echo '
+                        <li class="nav-item" style="width:120px">
                         <a class="nav-link active text-white" aria-current="page" href="host_auction.php">Host Auction</a>
                     </li> 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
+                            Options
                         </a>
                         <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item text-success" href="profile.php"><b>Profile</a></b></li>
@@ -23,10 +28,8 @@ session_start();
                             </li>
                             <li><a class="dropdown-item text-success" href="http://localhost/OnlineBidding/logout.php"><b>Logout</a></b></li>
                         </ul>
-                    </li>';
-
-                    if($_SESSION["isset"]==true)
-                    {
+                    </li>
+                        ';
                         // fetch current amount of user
                         $sql="SELECT money FROM user where user_id=".$_SESSION["user_id"];
                         // echo $sql;
@@ -71,7 +74,7 @@ session_start();
                     }
                     else
                     {
-                    echo'<li style="margin-left: 400px;">
+                    echo'<li style="margin-left: 600px;">
                         <button type="button" class="btn loginbtn" data-bs-toggle="modal" data-bs-target="#login"> Login </button>
                     </li>
                     <li style="margin-left: 15px;;">

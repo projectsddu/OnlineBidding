@@ -1,14 +1,11 @@
-
-
 $(document).ready(function () {
   var conn = new WebSocket('ws://localhost:8000');
   conn.onopen = function (e) {
     console.log("Connection established!");
   };
 
+ 
   conn.onmessage = function (e) {
-    //  document.getElementById("curr_bid").innerText=e.data;
-    //  document.getElementById("current_bid").innerText=Math.round(e.data+e.data*0.1);
     location.reload();
   };
 
